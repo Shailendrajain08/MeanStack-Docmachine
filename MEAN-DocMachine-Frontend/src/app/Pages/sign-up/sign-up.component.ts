@@ -22,7 +22,6 @@ export class SignUpComponent implements OnInit {
   submitted = false;
   registerForm!: FormGroup;
   closeResult!: string;
-  checked: boolean = false;
 
 
   constructor(private formBuilder: FormBuilder, private modalService: NgbModal) {
@@ -34,7 +33,8 @@ export class SignUpComponent implements OnInit {
       fullName: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
+      confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
+      checked:['', Validators.required]
     });
   }
 
@@ -58,6 +58,16 @@ export class SignUpComponent implements OnInit {
     }
   }
 
+  onClick1() {
+    if (this.password1 === 'password') {
+      this.password1 = 'text';
+      this.show1 = true;
+    } else {
+      this.password1 = 'password';
+      this.show1 = false;
+    }
+  }
+
   open(content: any) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', size: 'lg' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -76,7 +86,5 @@ export class SignUpComponent implements OnInit {
     }
   }
 
-  onCheck(event: any) {
-    this.checked = !this.checked
-  }
+  
 }
