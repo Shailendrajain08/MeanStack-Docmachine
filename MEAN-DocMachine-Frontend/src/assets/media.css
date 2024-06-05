@@ -1,0 +1,28 @@
+@media screen and (max-width:1440px){
+.submission_sec.Pending_realisation {min-height: 323px;}
+.submission_sec .submission_sec_img b{font-size: 15px;top: 37px;left: 34px;}
+.admin_dashboard_home .submission_sec{padding: 16px;}
+.admin_dashboard_home .Total_pipo{padding: 16px;}
+.submission_sec table{margin-left: 0;}
+.admin_dashboard_home .submission_sec{min-height:377px;}
+.admin_dashboard_home .submission_sec h3{font-size: 18px;}
+.admin_dashboard_home .submission_sec h5{font-size: 14px;}
+.admin_dashboard_home .Total_pipo{min-height: 279px;}	
+.admin_dashboard_home .Total_pipo h5{font-size: 17px;}
+.submission_secs{padding:16px;}
+.submission_secs ul li{font-size: 13px;}
+.map_height.Pending_realisation{min-height: 317px;}
+.dropdown{font-size: 14px;}
+.submission_sec.remittances,.submission_sec.edpms{min-height: 237px;}
+
+
+
+.import_export_sec .import_export_button .import_buttons,.import_export_sec .import_export_button .import_buttons{font-size: 15px;}
+}
+
+@media screen and (max-width:768px){
+.sidebar_left #sidebar{position:inherit; width:100%!important;}
+.main_nave .page-controls.navbar-dashboard,.content_top_common .content-wrap{padding-left:0px!important;}
+.top_spavce{min-height: 5px;}	
+.content_top_common .content-wrap{padding-left:0px;}
+}

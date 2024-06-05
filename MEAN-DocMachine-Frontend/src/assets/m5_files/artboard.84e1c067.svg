@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 18">
+  <g id="Components" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity=".5">
+    <g id="Layer-Overview-(Artboard)" transform="translate(-8 -39)" fill="#000">
+      <g id="Layer-Overview" transform="translate(0 30)">
+        <g transform="translate(8 9)" id="Icon">
+          <path id="Rectangle-2" fill-opacity=".35" d="M2 2h16v11H2z"/>
+          <path d="M2 13h16V2.611A.613.613 0 0017.385 2H2.615A.613.613 0 002 2.611V13zm.8-12h14.4c.994 0 1.8.794 1.8 1.773V14H1V2.773C1 1.793 1.806 1 2.8 1z" id="Rectangle-2"/>
+          <path d="M.588 14h18.824c.325 0 .588-.224.588-.5s-.263-.5-.588-.5H.588c-.325 0-.588.224-.588.5s.263.5.588.5zm14.304 0l1.084 3.346a.5.5 0 01-.952.308l-.373-1.154H5.348l-.372 1.154a.5.5 0 11-.952-.308L5.107 14h1.05l-.485 1.5h8.655l-.485-1.5h1.05zM10.476.346l.21.654H9.313l.212-.654a.5.5 0 01.952 0z" id="Combined-Shape"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,554 @@
+/*
+*
+* ==========================================
+* CUSTOM UTIL CLASSES
+* ==========================================
+*
+*/
+
+* {
+    font-family: "Poppins", sans-serif;
+}
+
+.login {
+    margin-top: -130px;
+    margin-left: 50px;
+}
+
+// .image2 {
+//     position: absolute !important;
+//     margin-top: -5% !important;
+//     width: 299px;
+//     height: 92px;
+// }
+.login,
+.image {
+    min-height: 100vh;
+    cursor: pointer;
+}
+
+.eye {
+    margin-top: -30px;
+    margin-bottom: 30px;
+    margin-left: 393px;
+    width: 20px;
+    height: 20px;
+}
+
+.fa {
+    color: #dfe2e6;
+}
+
+.parent {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.image1 {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 100vh;
+}
+
+.image2 {
+    position: absolute;
+    width: 299px;
+    height: 92px;
+}
+
+// .image3 {
+//     display:none;
+//     margin-top: 30% !important;
+// }
+.display-5 {
+    font-weight: 400;
+    color: #606670;
+    font-size: 32px;
+    margin-bottom: 15px;
+    margin-top: 0px;
+}
+
+.display-6 {
+    text-align: center;
+    width: 580%;
+    font-weight: 600;
+    color: #606670;
+    font-size: 22px;
+    margin-bottom: 12px;
+    margin-top: 60px
+}
+
+.bottom-text {
+    font-size: 12px;
+    font-weight: 400;
+    color: #606670;
+    width: 422px;
+    margin-left: 20px;
+}
+
+a {
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+    color: #606670;
+}
+
+.text-sm {
+    text-decoration: none;
+    color: #9b9b9b !important;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+::placeholder {
+    font-size: 12px;
+    color: #a5aab3 !important;
+}
+
+.text-ui {
+    font-size: 16px;
+    font-weight: 400;
+    color: #606670;
+    margin-bottom: 40px !important;
+}
+
+.bg-dark {
+    background-color: rgb(255, 255, 255) !important;
+    display: flex;
+    // justify-content: center;
+}
+
+input.email {
+    padding-left: 50px !important;
+    background-image: url("../../../assets/email.png");
+    background-repeat: no-repeat;
+    background-size: 17px 11px;
+    background-position: 20px center;
+    padding-top: 0px;
+}
+
+input.password {
+    padding-left: 50px !important;
+    background-image: url("../../../assets/Suche.png") !important;
+    background-repeat: no-repeat;
+    background-size: 17.5px 12px;
+    background-position: 20px center, 95% center;
+    padding-top: 0px;
+}
+
+.image2 {
+    position: absolute;
+    width: 299px;
+    height: 92px;
+}
+
+input.fullName {
+    padding-left: 50px !important;
+    background-image: url("../../../assets/ic_mail-2.png");
+    background-repeat: no-repeat;
+    background-size: 15px 15px;
+    background-position: 20px center;
+    padding-top: 0px;
+}
+
+.reg-sm {
+    height: 40px;
+    font-weight: 700;
+    font-size: 18px;
+    color: #606670;
+}
+
+.input {
+    box-shadow: none !important;
+    border: 1px solid #dedede !important;
+    width: 432px;
+    height: 40px;
+}
+
+label {
+    font-size: 14px;
+    font-weight: 400;
+    color: #606670;
+    margin-left: 8px;
+}
+
+.btn {
+    width: 160px;
+    height: 40px;
+    border-radius: 20px;
+    box-shadow: #51aee5 -2px 21px 20px -15px !important;
+    background-color: #51aee5;
+    font-size: 12px;
+    color: #ffffff;
+    margin-top: 15px;
+}
+
+.btn1 {
+    min-width: 100px;
+    height: 40px;
+    background-color: white;
+    font-size: 18px;
+    font-weight: 600 semibold;
+    color: #606670;
+    outline: none;
+}
+
+.btn2 {
+    width: 160px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #51aee5;
+    font-size: 12px;
+    color: #ffffff;
+}
+
+.leftl {
+    border: none;
+    margin-top: 10px;
+    margin-bottom: 50px;
+    cursor: pointer;
+}
+
+.disable {
+    background-color: #6cc9ff;
+}
+
+.topclass {
+    margin-top: 40px;
+    width: 90%;
+    text-align: right;
+    padding-top: 4%;
+    z-index: 1000;
+}
+
+// popup styling
+.popup {
+    width: 260px;
+}
+
+span.cls_002 {
+    font-family: Arial, serif;
+    font-size: 6.5px;
+    color: rgb(255, 255, 255);
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: none
+}
+
+div.cls_002 {
+    font-family: Arial, serif;
+    font-size: 6.5px;
+    color: rgb(255, 255, 255);
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: none
+}
+
+span.cls_003 {
+    font-family: Arial, serif;
+    font-size: 16.0px;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-style: normal;
+    text-decoration: none
+}
+
+div.cls_003 {
+    font-family: Arial, serif;
+    font-size: 16.0px;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-style: normal;
+    text-decoration: none
+}
+
+span.cls_005 {
+    font-family: Arial, serif;
+    font-size: 10.0px;
+    color: rgb(0, 0, 0);
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: none
+}
+
+div.cls_005 {
+    font-family: Arial, serif;
+    font-size: 10.0px;
+    color: rgb(0, 0, 0);
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: none
+}
+
+span.cls_004 {
+    font-family: Arial, serif;
+    font-size: 10.0px;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-style: normal;
+    text-decoration: none
+}
+
+div.cls_004 {
+    font-family: Arial, serif;
+    font-size: 10.0px;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-style: normal;
+    text-decoration: none
+}
+
+.mainClass {
+    float: left;
+    width: 58%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .bg-dark {
+        float: none;
+        height: 100%;
+        width: 100%;
+        padding-left: 10px;
+        margin-top: -10px;
+        margin-left: 50px;
+    }
+    .image1 {
+        width: 100%;
+        display: none;
+    }
+    .image2 {
+        margin-top: -2070px;
+        z-index: 1;
+        margin-left: 200px;
+        width: 270px;
+        height: 88px;
+        // margin-bottom: 50px;
+    }
+    .login {
+        margin-top: -250px;
+        margin-left: 10px;
+    }
+    .form-element {
+        width: 1000px !important;
+        align-items: center !important;
+    }
+    .leftl {
+        height: 40px;
+        width: 80px;
+        font-size: 14PX;
+        margin-top: 0px;
+        margin-right: -170px;
+    }
+    .display-5 {
+        font-weight: 500;
+        color: #606670;
+        font-size: 32px;
+        margin-bottom: 12px;
+        // margin-top: 10px;
+    }
+    .input {
+        box-shadow: none !important;
+        border: 1px solid #dedede !important;
+        width: 452px;
+        height: 40px;
+    }
+    form {
+        margin-top: -20px;
+    }
+    .btn {
+        width: 200px;
+        height: 40px;
+        border-radius: 20px;
+        background-color: #51aee5;
+        font-size: 15px;
+        color: #ffffff;
+    }
+    .bottom-text {
+        font-size: 12px;
+        font-weight: 400;
+        color: #606670;
+        width: 390px;
+    }
+    .topclass {
+        margin-top: 180px;
+        text-align: right;
+        padding-top: 4%;
+        z-index: 1000;
+        display: flex;
+        margin-bottom: 40px;
+    }
+    .mainClass {
+        width: 90%;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .bg-dark {
+        float: none;
+        height: 100%;
+        width: 100%;
+        margin-top: 10px;
+        margin-left: 25px;
+    }
+    .image1 {
+        // width: 100%;
+        display: none;
+    }
+    .image2 {
+        margin-top: -740px;
+        z-index: 1;
+        margin-left: 200px;
+        width: 270px;
+        height: 88px;
+        // margin-bottom: 50px;
+    }
+    .login {
+        margin-top: 100px;
+        margin-left: 10px;
+    }
+    .leftl {
+        height: 40px;
+        width: 80px;
+        font-size: 14PX;
+        margin-top: 0px;
+        margin-right: -170px;
+    }
+    .display-5 {
+        font-weight: 500;
+        color: #606670;
+        font-size: 32px;
+        margin-bottom: 12px;
+        margin-top: 40px;
+    }
+    .input {
+        box-shadow: none !important;
+        border: 1px solid #dedede !important;
+        width: 410px;
+        height: 40px;
+    }
+    // form {
+    //     margin-top: 10px;
+    // }
+    .btn {
+        width: 200px;
+        height: 40px;
+        border-radius: 20px;
+        background-color: #51aee5;
+        font-size: 15px;
+        color: #ffffff;
+    }
+    .bottom-text {
+        font-size: 12px;
+        font-weight: 400;
+        color: #606670;
+        width: 360px;
+    }
+    .mainClass {
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .bg-dark {
+        float: none;
+        height: 100%;
+        width: 100%;
+        margin-top: -50px;
+        margin-left: 15px;
+    }
+    .image1 {
+        // width: 100%;
+        display: none;
+    }
+    .image2 {
+        margin-top: -990px;
+        z-index: 1;
+        margin-left: 180px;
+        width: 270px;
+        height: 88px;
+        // margin-bottom: 50px;
+    }
+    .image3 {
+        display: block;
+        width: 200px;
+        height: 65px;
+    }
+    .login {
+        margin-top: 100px;
+        margin-left: 10px;
+    }
+    .leftl {
+        height: 40px;
+        width: 80px;
+        font-size: 14PX;
+        margin-top: 50px;
+        margin-right: -147px;
+    }
+    .display-5 {
+        font-weight: 500;
+        color: #606670;
+        font-size: 24px;
+        margin-bottom: 12px;
+        margin-top: 6px;
+    }
+    form {
+        margin-top: -10px;
+    }
+    .input {
+        box-shadow: none !important;
+        border: 1px solid #dedede !important;
+        width: 320px;
+        height: 30px;
+    }
+    .checkbox {
+        margin-right: 10px;
+        cursor: pointer;
+    }
+    form {
+        margin-top: -20px;
+        width: 300px;
+        height: 30px;
+    }
+    .btn {
+        width: 200px;
+        height: 40px;
+        border-radius: 20px;
+        background-color: #51aee5;
+        font-size: 15px;
+        color: #ffffff;
+    }
+    .leftl {
+        height: 40px;
+        width: 80px;
+        font-size: 14PX;
+        margin-top: 20px;
+    }
+    .mb-4 {
+        font-size: 12px;
+    }
+    .text-muted {
+        margin-left: -1px;
+    }
+    .bottom-text {
+        font-size: 12px;
+        font-weight: 400;
+        color: #606670;
+        width: 334px;
+    }
+    .topclass {
+        margin-top: 120px;
+        text-align: right;
+        padding-top: 4%;
+        z-index: 1000;
+        display: flex;
+        margin-bottom: 105px;
+    }
+    .mainClass {
+        width: 90%;
+    }
+}
