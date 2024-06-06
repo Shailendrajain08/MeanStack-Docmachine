@@ -1,12 +1,13 @@
-import { CommonModule, NgClass } from '@angular/common';
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
-  standalone: true,
-  imports: [CommonModule, FormsModule, NgClass, ReactiveFormsModule],
+  standalone: false,
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.scss'
 })
@@ -24,7 +25,7 @@ export class SignUpComponent implements OnInit {
   closeResult!: string;
 
 
-  constructor(private formBuilder: FormBuilder, private modalService: NgbModal) {
+  constructor(private formBuilder: FormBuilder, private modalService: NgbModal, private toaster : ToastrService, private authService : AuthService, private router : Router) {
   }
 
   ngOnInit(): void {
@@ -39,11 +40,31 @@ export class SignUpComponent implements OnInit {
   }
 
   get f() { return this.registerForm.controls; }
+
   onsubmit() {
-    console.log(this.registerForm.value)
+    if(this.registerForm.value.checked === true){
+      this.submitted = true
+      this.isDisabled = true;
+      if(this.registerForm.invalid) {
+        alert('Invalid inputs, please check again!');
+        this.isDisabled = false;
+        return ;
+      }
+      this.registerForm.value.role = 'manager';
+      this.registerForm.value.verified = 'no';
+      this.authService.register(this.registerForm.value).subscribe(
+        data => {
+        this.router.navigate(['/'], { queryParams: { registered: true } });
+        return data
+      }, (error) => {
+        console.error(error)
+      })
+    }
+    else{
+      alert('Please Accept Terms and Conditions!');
+      
+    }
   }
-
-
 
   onLogin() {
     throw new Error('Method not implemented.');
