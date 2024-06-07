@@ -30,14 +30,14 @@
                     </div>
                     <div class="form-group mb-3">
                         <label>Email</label>
-                        <input id="inputEmail" type="email" formControlName="email" placeholder="Your Email" required=""
+                        <input id="inputEmail" type="email" formControlName="emailId" placeholder="Your Email" required=""
                             class="form-control rounded-pill border-0 shadow-sm px-4 email input"
-                            [ngClass]="{ 'is-invalid': submitted && f.email.errors }" autocomplete="off" />
-                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                            <div *ngIf="f.email.errors.required" style="margin-left: 15px">
+                            [ngClass]="{ 'is-invalid': submitted && f.emailId.errors }" autocomplete="off" />
+                        <div *ngIf="submitted && f.emailId.errors" class="invalid-feedback">
+                            <div *ngIf="f.emailId.errors.required" style="margin-left: 15px">
                                 Email is required
                             </div>
-                            <div *ngIf="f.email.errors.pattern" style="margin-left: 15px">
+                            <div *ngIf="f.emailId.errors.pattern" style="margin-left: 15px">
                                 Not an Email
                             </div>
                         </div>
