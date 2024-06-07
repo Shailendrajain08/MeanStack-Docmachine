@@ -6,5 +6,4 @@ module.exports = router;
 
 
 router.post("/signup", (req, res) => {
-    console.log(res);
 })
