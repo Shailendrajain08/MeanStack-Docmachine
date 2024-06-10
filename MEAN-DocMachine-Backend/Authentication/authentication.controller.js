@@ -32,12 +32,26 @@ function signUpUser(data, callback) {
             let year = date.getFullYear();
             data.date = `${day}/${month}/${year}`;
             AuthModel.addUser(data, (err, res) => {
-                console.log("USER model");
-                console.log(res);
-            })
-            
+                if (err) {
+                    callback(err, null);
+                }
+                else if (res) {
+                    console.log(res);
+                    // ********** Post sign up activation **************
+                    const activationMailObj = { user: { first_name: data.first_name, last_name: data.last_name }, host: data.origin, userToken: token, to: [{ 'email': data.emailId, 'name': data.first_name + ' ' + data.last_name, 'type': 'to' }], heading: 'Welcome !' };
+                    // Function Name: mailObj
+
+                    // ********** super admin email notify on new registration from same company **************
+                    const mailObj = { newUser: { first_name: data.first_name, last_name: data.last_name, email: data.emailId }, host: data.origin, to: [{ 'email': 'admin@wrked.com', 'name': 'wrked', 'type': 'to' }, { 'email': 'eswervarma@uipep.com', 'name': 'wrked', 'type': 'cc' }], heading: 'New User Registration' };
+                    // Function Name: toAdminNewUser
+                    console.log(JSON.stringify(activationMailObj));
+                    callback(null, token, res);
+                } else {
+                    callback(null, null);
+                }
+            });
         } else {
-            callback(null, null);
+            callback(null, null)
         }
     });
 }

@@ -52,11 +52,11 @@ function generateJWTToken(id, callback) {
     };
     console.log('The Hex Id String:', payload);
     let token = jwt.sign(payload, SECRET, {
-        expiresIn: 604800 * 20 //20 weeks
+        expiresIn: 604800 * 20 //20 weeks'
     });
     token = 'JWT ' + token;
-
     console.info('Successfully created an access token', id, token);
+    // console.log("SECRET", SECRET)
     callback(null, token);
 }
 
