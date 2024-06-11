@@ -9,9 +9,6 @@ const EmailTemplate = require("../Model-Helper/email_template.js");
 
 
 const addUser = (user, callback) => {
-    console.log("ADD USER MODEL ");
-    console.log("m user", user);
-    let emailId = user.emailId;
     UserModel.create(user)
         .then((result) => {
             if (!result) {
@@ -20,7 +17,7 @@ const addUser = (user, callback) => {
             }else if(result){
             let resp = JSON.parse(JSON.stringify(result));
             if (delete resp.password) {
-                EmailTemplate.sendVerifyEmail({ emailId }, (err, res) => {
+                EmailTemplate.sendVerifyEmail( user , (err, res) => {
                     if (err) {
                         callback(err, null);
                     } else if (res) {
@@ -31,7 +28,7 @@ const addUser = (user, callback) => {
                 });
                     // console.log("User Model Result:", resp);
                 } else {
-                    EmailTemplate.sendVerifyEmail({ emailId }, (err, res) => {
+                    EmailTemplate.sendVerifyEmail( user , (err, res) => {
                         if (err) {
                             callback(err, null);
                         } else if (res) {

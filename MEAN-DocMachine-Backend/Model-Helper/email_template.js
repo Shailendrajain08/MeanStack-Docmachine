@@ -5,6 +5,7 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 const EmailFormat = require("../email-store/email-formats");
 require('dotenv').config({ path: '.env' });
 const fs = require('fs');
+const nodemailer = require('nodemailer');
 
 // let config = {
 //     localConfig: {
@@ -137,40 +138,50 @@ const fs = require('fs');
 
 
 const sendVerifyEmail = (dataObj, next) => {
+    console.log("email template sendVerifyEmail",dataObj)
     if (dataObj) {
-        // {{api-base}}/authenticate/updatePassword?emailId=benjamin@gmail.com
-        console.log("dataOBj",dataObj)
         validators.generateJWTToken(dataObj.emailId, (err, res) => {
-            console.dir("After token verification");
-            console.dir(dataObj.emailId);
             if (err) {
                 console.log("err");
                 next(err, null);
             } else if (res) {
-                const forgotemailLink = process.env.LIVE_URL + '/verifyEmail/' + res.split(" ")[1];
-                console.log(forgotemailLink);
-                let content = `<p>Hello!</p><br/>`;
-                content = content + `<p>Welcome to Docmachine Click <a href= '` + forgotemailLink + `'>to verify your account.</a></p><br/>`;
-                const html = EmailFormat.generalFormat({ html: content, heading: "Account Verification", host: process.env.LIVE_URL });
-                const msg = {
-                    to: dataObj.emailId, // Change to your recipient
-                    // bcc: ['docmachinetec@gmail.com', 'tramsdocmachine@gmail.com', 'fintech.innovations2021@gmail.com'],
-                    from: "shailendrajain.javaventures@gmail.com", // Change to your verified sender
-                    subject: "Verify Your email",
-                    text: "Welcome to docMachine",
-                    html: html
-                };
+                try {
+                    dataObj.token = res
+                    console.log("emailID", dataObj)
+                    // Construct the verification link
+                    const forgotemailLink = `${process.env.LIVE_URL}/verifyEmail/${res.split(" ")[1]}`;
+                    // Create the email content
+                    let content = `<p>Hello!</p><br/>`;
+                    content += `<p>Welcome to Docmachine. Click <a href='${forgotemailLink}'>to verify your account.</a></p><br/>`;
+                    const html = EmailFormat.generalFormat({ html: content, heading: "Account Verification", host: process.env.LIVE_URL });
 
-                sgMail.send(msg).then(() => {
-                        console.log("Message Sent");
-                        next(null, { success: true });
+                    // Configure the email transport using nodemailer
+                    let transporter = nodemailer.createTransport({
+                        service: 'gmail', // Use your email service
+                        auth: {
+                            user: process.env.EMAIL_USER, // Your email
+                            pass: process.env.EMAIL_PASSWORD // Your email password
+                        }
+                    });
 
-                    }).catch((error) => {
-                        console.log(error);
-                        console.error(JSON.stringify(error));
-                        next(error, null);
+                    // Setup email data
+                    let mailOptions = {
+                        from: 'shailendrajain.javaventures@gmail.com', // Sender address
+                        to: dataObj.emailId, // List of recipients
+                        // bcc: ['docmachinetec@gmail.com', 'tramsdocmachine@gmail.com', 'fintech.innovations2021@gmail.com'], // BCC recipients
+                        subject: 'Verify Your email', // Subject line
+                        text: 'Welcome to docMachine', // Plain text body
+                        html: html // HTML body content
+                    };
 
-                    })
+                    // Send mail with defined transport object
+                    let info = transporter.sendMail(mailOptions);
+                    console.log("Message sent: %s", info.messageId);
+                    next(null, { dataObj});
+                } catch (error) {
+                    console.error(error);
+                    next(error, null);
+                }
             } else {
                 console.dir("null");
 

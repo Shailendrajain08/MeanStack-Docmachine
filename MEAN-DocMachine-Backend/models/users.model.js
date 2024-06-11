@@ -25,9 +25,14 @@ const UserSchema = new Schema({
         type: Boolean,
         required: false,
         default: false
-    },role: {
+    },
+    role: {
         type: String
-    },verified: {
+    },
+    verified: {
+        type: String
+    },
+    user_name:{
         type: String
     },
     date: {

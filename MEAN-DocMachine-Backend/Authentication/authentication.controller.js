@@ -10,9 +10,7 @@ const AuthModel = require("./authentication.model")
 
 
 function capitaliseFirstLetter(data) {
-    console.log(data);
-    data['fullName'] = data.fullName.charAt(0).toUpperCase() + data.fullName.slice(1);
-    console.log(data);
+    data.fullName = data.fullName.charAt(0).toUpperCase() + data.fullName.slice(1);
     return data;
 }
 
@@ -31,21 +29,28 @@ function signUpUser(data, callback) {
             let month = date.getMonth() + 1;
             let year = date.getFullYear();
             data.date = `${day}/${month}/${year}`;
+            data["user_name"] =
+            data.emailId.substring(0, data.emailId.indexOf("@")) +
+            "_" +
+            data.emailId.substring(data.emailId.indexOf("@") + 1, data.emailId.indexOf(".")) +
+            "_" +
+            data.emailId.substring(data.emailId.indexOf(".") + 1, data.emailId.length);
+            console.log(data)
             AuthModel.addUser(data, (err, res) => {
                 if (err) {
                     callback(err, null);
                 }
                 else if (res) {
-                    console.log(res);
+                    console.log("res from add user",data);
                     // ********** Post sign up activation **************
-                    const activationMailObj = { user: { first_name: data.first_name, last_name: data.last_name }, host: data.origin, userToken: token, to: [{ 'email': data.emailId, 'name': data.first_name + ' ' + data.last_name, 'type': 'to' }], heading: 'Welcome !' };
+                    const activationMailObj = { user: { full_name: data.fullName}, host: data.origin, userToken: data.token, to: [{ 'email': data.emailId, 'name': data.fullName, 'type': 'to' }], heading: 'Welcome !' };
                     // Function Name: mailObj
 
                     // ********** super admin email notify on new registration from same company **************
-                    const mailObj = { newUser: { first_name: data.first_name, last_name: data.last_name, email: data.emailId }, host: data.origin, to: [{ 'email': 'admin@wrked.com', 'name': 'wrked', 'type': 'to' }, { 'email': 'eswervarma@uipep.com', 'name': 'wrked', 'type': 'cc' }], heading: 'New User Registration' };
+                    const mailObj = { newUser: { full_name: data.fullName, email: data.emailId }, host: data.origin, to: [{ 'email': 'jain.shailendra0894@gmail.com', 'name': 'shailendra', 'type': 'to' }], heading: 'New User Registration' };
                     // Function Name: toAdminNewUser
                     console.log(JSON.stringify(activationMailObj));
-                    callback(null, token, res);
+                    callback(null, data.token, res);
                 } else {
                     callback(null, null);
                 }
