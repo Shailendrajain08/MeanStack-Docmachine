@@ -1,7 +1,5 @@
 // const MailHelper = require('../../../helpers/email_helpers');
 const validators = require("../Healpers/validators");
-const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 const EmailFormat = require("../email-store/email-formats");
 require('dotenv').config({ path: '.env' });
 const fs = require('fs');

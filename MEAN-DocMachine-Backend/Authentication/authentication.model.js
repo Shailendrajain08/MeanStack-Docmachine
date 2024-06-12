@@ -3,8 +3,6 @@ const bcrypt = require('bcryptjs');
 const validators = require("../Healpers/validators.js");
 const UserModel = require("../models/users.model").UserModel;
 // const ProfileDetailsModel = require('../projects/models/ProfileDetails').ProfileDetailsModel;
-const sgMail = require("@sendgrid/mail");
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 const EmailTemplate = require("../Model-Helper/email_template.js");
 
 
