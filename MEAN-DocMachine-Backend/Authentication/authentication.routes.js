@@ -10,6 +10,7 @@ const resp = require("../Healpers/respHelper")
 router.post("/signup", (req, res) => {
     console.log("user body",req.body.user)
     if (req.body.user) {
+        console.log()
         UserModel.findOne({
             emailId: req.body.user.emailId
         }).then((user)=> {
@@ -44,5 +45,24 @@ router.post("/signup", (req, res) => {
 })
 
 router.post("/login", (req, res) => {
-    console.log("my res",res)
+    if (req.headers && req.headers.authorization) {
+        headers = req.get("authorization");
+        headers = headers.split(" ");
+        AuthCtrl.userLogin(headers[1], (err, docs) => {
+            if (err) {
+                if (err.name && err.name === "wrong mode of login")
+                    resp.alreadyRegisteredWithGoogle(
+                        res,
+                        "Email logged in through google please login through Google!"
+                    );
+                else resp.errorResponse(res);
+            } else if (docs) {
+                resp.successPostResponse(res, docs, "Authenticated");
+            } else {
+                resp.noRecordsFound(res, "Invalid Email-ID/Password");
+            }
+        });
+    }else {
+        resp.missingBody(res, "Missing Email-ID/Password");
+    }
 });

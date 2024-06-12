@@ -37,7 +37,14 @@ const UserSchema = new Schema({
     },
     date: {
         type: String
-    }
+    },
+    termsAndCondition : {
+        type : Boolean
+    },
+    otpDone: {
+        type: String
+    },
+    otpDetails: Schema.Types.Mixed,
 }, { timestamps: true });
 const User = mongoose.model("users", UserSchema);
 module.exports = {

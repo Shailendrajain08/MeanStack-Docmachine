@@ -10,7 +10,6 @@ const addUser = (user, callback) => {
     UserModel.create(user)
         .then((result) => {
             if (!result) {
-                console.log("Something went wrong");
                 callback(err, null);
             }else if(result){
             let resp = JSON.parse(JSON.stringify(result));
@@ -24,7 +23,6 @@ const addUser = (user, callback) => {
                         callback(null, null);
                     }
                 });
-                    // console.log("User Model Result:", resp);
                 } else {
                     EmailTemplate.sendVerifyEmail( user , (err, res) => {
                         if (err) {
@@ -41,12 +39,31 @@ const addUser = (user, callback) => {
             })
         .catch((err) => {
             console.error(err);
+            callback(err, null);
         });
 
+};
+
+const login = (query, callback) => {
+    console.log('userModel Data');
+    console.log(query);
+    UserModel.find(query).then((result)=> {
+        console.log(result)
+        if (result.length > 0) {
+            console.log("User Model Result", result);
+            callback(null, result);
+        } else {
+            callback("User Model Result", "Invalid email");
+        }
+    }).catch((err) => {
+            console.log("User Model Error", err);
+            callback(err, null);
+    })
 };
 
 
 
 module.exports = {
-    addUser: addUser
+    addUser: addUser,
+    login : login
 }

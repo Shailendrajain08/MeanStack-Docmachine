@@ -35,14 +35,14 @@ export class SignUpComponent implements OnInit {
       emailId: ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
-      checked:['', Validators.required]
+      termsAndCondition:['', Validators.required]
     });
   }
 
   get f() { return this.registerForm.controls; }
 
   onsubmit() {
-    if(this.registerForm.value.checked === true){
+    if(this.registerForm.value.termsAndCondition === true){
       this.submitted = true
       this.isDisabled = true;
       if(this.registerForm.invalid) {
@@ -62,12 +62,11 @@ export class SignUpComponent implements OnInit {
     }
     else{
       alert('Please Accept Terms and Conditions!');
-      
     }
   }
 
   onLogin() {
-    throw new Error('Method not implemented.');
+    this.router.navigate(['/'])
   }
   onClick() {
     if (this.password === 'password') {

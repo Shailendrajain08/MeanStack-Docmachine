@@ -36,4 +36,22 @@ export class AuthService {
       user: user
     });
   }
+
+  login (loginData:any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization:
+          "Bearer " + btoa(loginData.email + ":" + loginData.password),
+      }),
+    };
+    console.log(httpOptions);
+    return this.http.post(
+      `${this.apiUrl}/authenticate/login`, 
+      null,
+      httpOptions
+    )
+  }
+  
+
 }

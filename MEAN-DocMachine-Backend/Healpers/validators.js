@@ -25,7 +25,6 @@ function hashPassword(password, callback) {
             console.error('Error while hashing the password', rounds, password, err, hash);
             callback(err, null);
         } else if (hash) {
-            console.log("Compare Password");
             //    console.log(bcrypt.compareSync(password,currentPassword));
             console.
             info('Hash Successfully Created');
@@ -47,6 +46,7 @@ function decodeAuthString(authString, callback) {
 }
 
 function generateJWTToken(id, callback) {
+    console.log("8888888888",id)
     const payload = {
         _id: id
     };
