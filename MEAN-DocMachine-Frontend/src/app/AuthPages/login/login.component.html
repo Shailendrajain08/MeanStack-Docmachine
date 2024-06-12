@@ -1,1 +1,134 @@
-<p>login works!</p>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div style="padding-right: 0 !important; overflow: hidden" class="container-fluid">
+    <div style="display: flex; width: 100%" class="no-gutter">
+        <!-- The image half -->
+
+        <!-- The content half -->
+        <div class="bg-dark">
+            <div style="margin-top: 3%; width: 90%; text-align: right">
+                <button style="cursor: pointer" class="leftl btn1" [class.disable]="isVisible" [disabled]="isVisible" (click)="onSignup()">
+          Signup
+        </button>
+            </div>
+            <div class="login d-flex align-items-center">
+                <!-- Demo content-->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-10 col-xl-9 mx-auto">
+                            <div style="display: flex;">
+                                <h6 class="display-5">Login</h6> <span style="margin-top: 6px; margin-left: 10px; font-size: 20px; color: #ff3d3d;">DEV</span>
+                            </div>
+
+                            <p class="mb-4 text-ui">
+                                Use your email, password and Google Authenticator OTP to access your account
+                            </p>
+                            <!-- [formGroup]="loginForm" -->
+                            <form  (ngSubmit)="onSubmit()" style="margin-bottom: 20px;">
+                                <div class="form-group mb-3">
+                                    <label for="inputEmail">Email</label>
+                                    <input formControlName="email" id="inputEmail" type="email" placeholder="Your Email" required="" autocomplete="off" class="form-control rounded-pill border-0 shadow-sm px-4 email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                        <div *ngIf="f.email.errors.required" style="margin-left: 15px;">Email is required
+                                        </div>
+                                        <div *ngIf="f.email.errors.pattern" style="margin-left: 15px;">Not an Email
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label for="password1">Password</label>
+                                    <input [type]="password" formControlName="password" id="password1" type="password" placeholder="Your Password" autocomplete="off" required="" class="
+                      form-control
+                      rounded-pill
+                      border-0
+                      shadow-sm
+                      px-4
+                      password
+                      password1" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                                    <div (click)="onClick()" class="eye">
+                                        <i class="fa fa-eye" aria-hidden="true" *ngIf="!show"></i>
+                                        <i class="fa fa-eye-slash" aria-hidden="true" *ngIf="show"></i>
+                                    </div>
+                                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                        <div *ngIf="f.password.errors.required" style="margin-left: 15px; margin-top: -16px;">Please enter password
+                                        </div>
+                                        <div *ngIf="f.password.errors.minlength" style="margin-left: 15px; margin-top: -16px;">Password should be more than 6 letter
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3" *ngIf='otp'>
+                                    <label for="password2">Enter the OTP</label>
+                                    <input id="password2" placeholder="Enter the OTP" required="" class="form-control rounded-pill border-0 shadow-sm px-4 password1" (input)='inputFun($any($event.target).value)' />
+                                </div>
+
+
+                                <p class="text-muted mb-4 bottom-text ml-2">
+                                    By continuing, you agree to DocMachine
+                                    <a (click)="open(content)">Term of service</a> we will manage information as described in our <a>privacy policy agrement</a>
+                                </p>
+                                <div>
+                                    <button type="submit" class="btn btn-block mb-2 rounded-pill shadow-sm reg-sm" style="float: left; margin-top: 20px;" [class.disable]="isDisabled" [disabled]="isDisabled">
+                    Login
+                  </button>
+                                    <p href="#" class="text-sm" style="float: left; margin-top: 30px; margin-left: 23px" [routerLink]="['/forgotpassword']">
+                                        Forgot Password?
+                                    </p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- End -->
+            </div>
+        </div>
+
+        <!-- End -->
+        <div class="parent" style="
+          width: 42%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        ">
+            <img style="width: 100%" class="image1" src="./assets/Image.png" />
+            <img class="image2" src="./assets/LogoFinal.png" />
+        </div>
+    </div>
+</div>
+
+
+<ng-template #content let-modal>
+
+    <div class="modal-body">
+        <div class="row no-gutter">
+            <!-- The image half -->
+            <!-- <div class="col-md-6 d-none d-md-flex bg-image"></div> -->
+
+
+            <!-- The content half -->
+            <!-- DB_URL=mongodb://localhost:27017/docMachine -->
+            <div class="col-md-7 bg-dark1" style="margin: 10px;">
+                <div class="d-flex py-5" style="padding: 0px !important;">
+
+                    <!-- Demo content-->
+                    <div class="container popup">
+                        <div class="row">
+                            <div class="col-lg-10 col-xl-7 mrg">
+                                <h6 class="display-6">SOFTWARE LICENSE AGREEMENT</h6>
+
+                                <iframe src="./../../assets/T&C.html" width="580%" height="500px" style="border: none"></iframe>
+                                <button type="submit" style="margin-left: 250px;" class="btn" (click)="modal.dismiss('Cross click')">
+                OK
+              </button>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End -->
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</ng-template>
