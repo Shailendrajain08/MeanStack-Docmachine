@@ -1,16 +1,14 @@
 const express = require('express');
 const router = express.Router();
 module.exports = router;
-const UserModel = require('../models/users.model').UserModel;
+const UserModel = require('../../models/users.model').UserModel;
 const AuthCtrl = require("./authentication.controller");
-const resp = require("../Healpers/respHelper")
+const resp = require("../../Healpers/respHelper")
 // const aws = require("aws-sdk");
 
 
 router.post("/signup", (req, res) => {
-    console.log("user body",req.body.user)
     if (req.body.user) {
-        console.log()
         UserModel.findOne({
             emailId: req.body.user.emailId
         }).then((user)=> {

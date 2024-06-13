@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <div style="padding-right: 0 !important; overflow: hidden" class="container-fluid">
+      <div style="display: flex; width: 100%" class="no-gutter">
+        <!-- The image half -->
+
+        <!-- The content half -->
+        <div class="bg-dark mainClass">
+          <div *ngIf="tfa" style="margin-top: 50px;">
+
+                <span *ngIf="tfa.tempSecret">
+
+                    <p style="text-align: center;">Scan the QR code and enter the secret key Using Google Authenticator
+                        Application</p>
+                    <img [src]="tfa.dataURL" alt="" class="img-thumbnail" style="display:block;margin:auto">
+
+                    <p style="text-align: center;">Auth Type - Time Based - OTP</p>
+
+                    <form class="form-group" (ngSubmit)="confirm()" #otpForm="ngForm"
+                          style="text-align: -webkit-center;">
+                        <input name="authcode" #iauthcode="ngModel"
+                               class="form-control rounded-pill border-0 shadow-sm px-4 password1" maxlength="6"
+                               placeholder="Enter the Auth Code" id="authcode" autocomplete="off" [(ngModel)]="authcode"
+                               required>
+                        <br>
+                        <button type="Submit" class="btn btn-lg btn-primary btn-block btn-signin"
+                                [disabled]="iauthcode?.errors?.required">Submit</button>
+                    </form>
+                </span>
+          </div>
+        </div>
+
+        <!-- End -->
+        <div class="parent" style="
+          width: 42%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        ">
+          <img style="width: 100%" class="image1" src="./assets/Image.png"/>
+          <img class="image2" src="./assets/LogoFinal.png"/>
+        </div>
+      </div>
+    </div>

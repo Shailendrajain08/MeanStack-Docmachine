@@ -1,11 +1,11 @@
 const bcrypt = require('bcryptjs');
-const validators = require("../Healpers/validators");
+const validators = require("../../Healpers/validators")
 // const EmailTemplate = require("../projects/model_helpers/email_template");
 // const EmailTemplates = require('../mails/mailhelper/email-store/email-templates');
 // const Email = require('../../helpers/mail');
 const speakeasy = require('speakeasy');
 const QRCode = require('qrcode');
-const UserModel = require("../models/users.model").UserModel;
+const UserModel = require("../../models/users.model").UserModel;
 const AuthModel = require("./authentication.model")
 
 
@@ -57,13 +57,9 @@ function signUpUser(data, callback) {
 }
 
 function userLogin(authString, callback) {
-    console.log(authString);
     validators.decodeAuthString(authString, (email, password) => {
-        console.log("email", email);
-        console.log('password', password);
         if (email && password) {
             AuthModel.login({ emailId: email }, (err, res) => {
-                console.log("AuthCtrl", res[0]._id);
                 if (err) {
                     callback(err, null);
                 } else if (res[0].password) {
@@ -73,8 +69,6 @@ function userLogin(authString, callback) {
                         if (err) {
                             callback(err, null);
                         } else if (same) {
-                            console.log('11161717171717');
-                            console.log(res);
                             if (res[0].otpDone == 'no') {
                                 const secret = speakeasy.generateSecret({
                                     length: 10,
@@ -108,14 +102,11 @@ function userLogin(authString, callback) {
                                                     tfaURL: secret.otpauth_url
                                                 });
                                             });
-                                            console.log("Bene getting successfully:",result);
-                                            //callback(null, user);
                                         } else {
                                             callback(null, null);
                                         }
 
                                     }).catch((err) => {
-                                        console.log("error while adding product:", err);
                                             callback(err, null);
                                     })
 
@@ -149,7 +140,6 @@ function userLogin(authString, callback) {
                                     UserModel.updateOne({
                                         _id: res[0]._id
                                     }, { $set: { "otpDetails": data } }).then((result) => {
-                                        console.log("00000000",result);
                                         if (result) {
                                             validators.generateJWTToken(res[0]._id, (err, token) => {
                                                 callback(null, {
@@ -161,13 +151,10 @@ function userLogin(authString, callback) {
                                                     tfaURL: secret.otpauth_url
                                                 });
                                             });
-                                            console.log("Bene getting successfully:", result);
-                                            //callback(null, user);
                                         } else {
                                             callback(null, null);
                                         }
                                     }).catch((err) => {
-                                        console.log("error while adding product:", err);
                                         callback(err, null);
                                     })
 

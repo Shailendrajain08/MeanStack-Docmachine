@@ -1,5 +1,5 @@
 // const MailHelper = require('../../../helpers/email_helpers');
-const validators = require("../Healpers/validators");
+const validators = require("../Healpers/validators")
 const EmailFormat = require("../email-store/email-formats");
 require('dotenv').config({ path: '.env' });
 const fs = require('fs');
@@ -136,16 +136,13 @@ const nodemailer = require('nodemailer');
 
 
 const sendVerifyEmail = (dataObj, next) => {
-    console.log("email template sendVerifyEmail",dataObj)
     if (dataObj) {
         validators.generateJWTToken(dataObj.emailId, (err, res) => {
             if (err) {
-                console.log("err");
                 next(err, null);
             } else if (res) {
                 try {
                     dataObj.token = res
-                    console.log("emailID", dataObj)
                     // Construct the verification link
                     const forgotemailLink = `${process.env.LIVE_URL}/verifyEmail/${res.split(" ")[1]}`;
                     // Create the email content
@@ -174,7 +171,6 @@ const sendVerifyEmail = (dataObj, next) => {
 
                     // Send mail with defined transport object
                     let info = transporter.sendMail(mailOptions);
-                    console.log("Message sent: %s", info.messageId);
                     next(null, { dataObj});
                 } catch (error) {
                     console.error(error);

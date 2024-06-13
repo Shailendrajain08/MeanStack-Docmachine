@@ -25,7 +25,6 @@ function hashPassword(password, callback) {
             console.error('Error while hashing the password', rounds, password, err, hash);
             callback(err, null);
         } else if (hash) {
-            //    console.log(bcrypt.compareSync(password,currentPassword));
             console.
             info('Hash Successfully Created');
             callback(null, hash);
@@ -46,17 +45,13 @@ function decodeAuthString(authString, callback) {
 }
 
 function generateJWTToken(id, callback) {
-    console.log("8888888888",id)
     const payload = {
         _id: id
     };
-    console.log('The Hex Id String:', payload);
     let token = jwt.sign(payload, SECRET, {
         expiresIn: 604800 * 20 //20 weeks'
     });
     token = 'JWT ' + token;
-    console.info('Successfully created an access token', id, token);
-    // console.log("SECRET", SECRET)
     callback(null, token);
 }
 
@@ -64,32 +59,26 @@ function generateJWTTokenPdf(id, callback) {
     const payload = {
         _id: id,
     };
-    console.log('The Hex Id String:', payload);
     let token = jwt.sign(payload, SECRET, {
         expiresIn: 604800 * 20 //20 weeks
     });
     token = 'JWT ' + token;
-
-    console.info('Successfully created an access token', id, token);
     callback(null, token);
 }
 
 function generateJWTTokenMember(email, name, companyId, companyName, callback) {
 
-    console.log('Email', email);
+  
     const payload = {
         email: email,
         name: name,
         companyId: companyId,
         companyName: companyName
     };
-    console.log('The Hex Id String:', payload);
     let token = jwt.sign(payload, SECRET, {
         expiresIn: 604800 * 20 //20 weeks
     });
     token = 'JWT ' + token;
-
-    console.info('Successfully created an access token', email, token);
     callback(null, token);
 }
 

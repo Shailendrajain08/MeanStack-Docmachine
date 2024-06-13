@@ -10,7 +10,8 @@ const passport = require("passport");
 const { connectDB } = require("./db.js");
 dotenv.config();
 
-const Auth = require('./Authentication/authentication.routes.js');
+const Auth = require('./App/Routers/Authentication/authentication.routes.js');
+const otp = require('./App/Routers/otp/otp.routes.js')
 
 app.use(express.json())
 app.use(cookieParser())
@@ -25,8 +26,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
+require("./App/config/passport.js")(passport);
 
 app.use("/api/authenticate", Auth);
+app.use(
+    "/api/otp",
+    passport.authenticate("jwt", { session: false }),
+    otp
+);
 
 app.listen(3000, () => console.log("Server started at port number: 3000"));
 

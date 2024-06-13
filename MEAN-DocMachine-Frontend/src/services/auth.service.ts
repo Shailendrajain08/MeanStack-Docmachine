@@ -20,7 +20,6 @@ export class AuthService {
   }
 
   public addToken(token: string) {
-    console.log(token);
     localStorage.setItem("token", token);
     this.authToken = token;
   }
@@ -31,7 +30,6 @@ export class AuthService {
   }
 
   register(user: any) {
-    console.log(user)
     return this.http.post(`${this.apiUrl}/authenticate/signup`, {
       user: user
     });
@@ -45,12 +43,39 @@ export class AuthService {
           "Bearer " + btoa(loginData.email + ":" + loginData.password),
       }),
     };
-    console.log(httpOptions);
     return this.http.post(
       `${this.apiUrl}/authenticate/login`, 
       null,
       httpOptions
     )
+  }
+
+  verify(data:any) {
+    this.loadFromLocalStorage();
+    const httpOptions = {
+      headers: new HttpHeaders({ Authorization: this.authToken }),
+    };
+    return this.http.post(
+      `${this.apiUrl}/otp/verify`,
+      {
+        data: data,
+      },
+      httpOptions
+    );
+  }
+
+  public getUser() {
+    this.loadFromLocalStorage();
+    const httpOptions = {
+      headers: new HttpHeaders({ Authorization: this.authToken }),
+    };
+    return this.http.post(
+      `${this.apiUrl}/team/getUser`,
+      {
+        team: "team",
+      },
+      httpOptions
+    );
   }
   
 

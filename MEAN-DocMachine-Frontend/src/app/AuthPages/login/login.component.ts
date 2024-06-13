@@ -69,9 +69,27 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginForm.value)
       .subscribe(
         (data: any) => {
-          console.log(data)
           this.authService.addLoginData(data);
           this.data = data
+          if (data['result']) {
+            this.authService.addToken(data['result'].token);
+            if (data['result']['dataURL']) {
+              this.router.navigate(['/2FA']);
+            } else {
+              this.otp = true;
+              // if (data['result']) {
+              //   this.userService.addToken(data['result'].token);
+              this.authService.getUser().subscribe(
+                data => {
+                  this.data1 = data
+                },
+                () => {
+                  this.loginError();
+                });
+            }
+          } else {
+            this.loginError();
+          }
         })
   }
 
@@ -79,7 +97,6 @@ export class LoginComponent implements OnInit {
   loginError() {
     this.isDisabled = false;
   }
-
   onSignup() {
     this.router.navigate(['/signUp'])
   }
@@ -93,7 +110,6 @@ export class LoginComponent implements OnInit {
   }
 
   getDismissReason(reason: any): string {
-    console.log('ddhdhdhh')
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
