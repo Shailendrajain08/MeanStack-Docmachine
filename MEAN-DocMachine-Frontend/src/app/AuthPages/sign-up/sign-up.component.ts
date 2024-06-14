@@ -25,7 +25,7 @@ export class SignUpComponent implements OnInit {
   closeResult!: string;
 
 
-  constructor(private formBuilder: FormBuilder, private modalService: NgbModal, private toaster : ToastrService, private authService : AuthService, private router : Router) {
+  constructor(private formBuilder: FormBuilder, private modalService: NgbModal, private toaster: ToastrService, private authService: AuthService, private router: Router, private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
@@ -35,33 +35,46 @@ export class SignUpComponent implements OnInit {
       emailId: ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
-      termsAndCondition:['', Validators.required]
+      termsAndCondition: ['', Validators.required]
     });
   }
 
   get f() { return this.registerForm.controls; }
 
   onsubmit() {
-    if(this.registerForm.value.termsAndCondition === true){
+    if (this.registerForm.value.termsAndCondition === true) {
       this.submitted = true
       this.isDisabled = true;
-      if(this.registerForm.invalid) {
-        alert('Invalid inputs, please check again!');
+      if (this.registerForm.invalid) {
+        this.toastr.error('Invalid inputs, please check again!');
         this.isDisabled = false;
-        return ;
+        return;
       }
       this.registerForm.value.role = 'manager';
       this.registerForm.value.verified = 'no';
       this.authService.register(this.registerForm.value).subscribe(
         data => {
-        this.router.navigate(['/'], { queryParams: { registered: true } });
-        return data
-      }, (error) => {
-        console.error(error)
-      })
+          this.toastr.success('Registered Successfully!');
+          this.router.navigate(['/'], { queryParams: { registered: true } });
+          return data
+        }, error => {
+          this.isDisabled = false;
+          console.log(error)
+          if (error.error == 'Both password should be same') {
+            this.toastr.error('Registration unsuccessful!, Both password should be same');
+          }
+          else if (error.error == 'Email ID already exist') {
+            this.toastr.error('Registration unsuccessful!, Email already exist');
+          }
+          else {
+            this.toastr.error('Registration unsuccessful!, please check the details');
+          }
+
+          console.log("error")
+        });
     }
-    else{
-      alert('Please Accept Terms and Conditions!');
+    else {
+      this.toastr.error('Please Accept Terms and Conditions!');
     }
   }
 
@@ -106,5 +119,5 @@ export class SignUpComponent implements OnInit {
     }
   }
 
-  
+
 }

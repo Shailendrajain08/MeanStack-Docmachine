@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../../../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
   data: any;
   closeResult: string | undefined;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private modalService: NgbModal, private authService: AuthService) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private modalService: NgbModal, private authService: AuthService, private toastr : ToastrService) {
 
   }
 
@@ -62,40 +63,77 @@ export class LoginComponent implements OnInit {
       this.submitted = true
       this.isDisabled = true;
       if (this.loginForm.invalid) {
+        this.toastr.error('Invalid inputs, please check again!');
         this.isDisabled = false;
         return;
       }
-    }
-    this.authService.login(this.loginForm.value)
-      .subscribe(
-        (data: any) => {
-          this.authService.addLoginData(data);
-          this.data = data
-          if (data['result']) {
-            this.authService.addToken(data['result'].token);
-            if (data['result']['dataURL']) {
-              this.router.navigate(['/2FA']);
+      this.authService.login(this.loginForm.value)
+        .subscribe(
+          (data: any) => {
+            this.authService.addLoginData(data);
+            this.data = data
+            if (data['result']) {
+              this.authService.addToken(data['result'].token);
+              if (data['result']['dataURL']) {
+                this.router.navigate(['/2FA']);
+              } else {
+                this.otp = true;
+                // if (data['result']) {
+                //   this.userService.addToken(data['result'].token);
+                this.authService.getUser().subscribe(
+                  data1 => {
+                    this.data1 = data1
+                  },
+                  error1 => {
+                    this.loginError();
+                  });
+              }
             } else {
-              this.otp = true;
-              // if (data['result']) {
-              //   this.userService.addToken(data['result'].token);
-              this.authService.getUser().subscribe(
-                data => {
-                  this.data1 = data
-                },
-                () => {
-                  this.loginError();
-                });
+              this.loginError();
+            }
+          }, error=> {
+            this.loginError();
+          })
+    } else {
+      this.authService.verify(this.value).subscribe((data:any) => {
+        if (this.data1['data'][0].emailId == 'shailendra.jain0894@gmail.com' || this.data1['data'][0].emailId == 'jain.shailendra0894@gmail.com') {
+          this.router.navigate(['/home/power-admin/pending'])
+        } else {
+          if (this.data1['data'][0]['emailIdVerified']) {
+            if (this.data1['data'][0]['verified'] == 'yes') {
+              if (data['status'] == 200) {
+                this.toastr.success(data['message']);
+                if (this.data['result']['role'] == 'ca') {
+                  this.authService.role = this.data['result']['role'];
+                  this.router.navigate(['/home/caDocuments/all'])
+                } else {
+                  this.authService.role = this.data['result']['role'];
+                  if (this.data1['data'][0].companyId) {
+                    this.router.navigate(['/home/dashboardTask'])
+                  } else {
+                    this.router.navigate(['createTeam']);
+                  }
+                }
+              } else {
+                this.toastr.error(data['message']);
+              }
+            } else {
+              this.router.navigate(['newUser'])
             }
           } else {
-            this.loginError();
+            this.router.navigate(['notVerified'])
           }
-        })
+        }
+      }, error => {
+        this.loginError();
+      })
+    }
   }
 
 
   loginError() {
     this.isDisabled = false;
+    this.toastr.error('Login unsuccessful!, Please check the details');
   }
   onSignup() {
     this.router.navigate(['/signUp'])

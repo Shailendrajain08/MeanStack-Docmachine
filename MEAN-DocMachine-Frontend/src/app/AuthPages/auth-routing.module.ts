@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { TwoFactorAuthComponent } from './two-factor-auth/two-factor-auth.component';
+import { VerifyEmailComponent } from './verify-email/verify-email.component';
 
 const routes: Routes = [
     {
@@ -19,7 +20,12 @@ const routes: Routes = [
         path: '2FA',
         component: TwoFactorAuthComponent,
         pathMatch: 'full'
-    }
+    },
+    {
+        path: "verifyEmail/:id",
+        component: VerifyEmailComponent,
+        pathMatch: "full",
+      }
 ];
 
 @NgModule({

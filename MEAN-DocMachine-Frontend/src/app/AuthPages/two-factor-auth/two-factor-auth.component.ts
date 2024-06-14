@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-two-factor-auth',
@@ -14,7 +15,7 @@ export class TwoFactorAuthComponent implements OnInit {
   public tfa: any;
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService,
-              private router: Router) {
+              private router: Router, private toastr : ToastrService) {
     
   }
 
@@ -29,18 +30,16 @@ export class TwoFactorAuthComponent implements OnInit {
   confirm() {
     this.authService.verify(this.authcode)
       .subscribe(
-        data => {
-          for(let i in data){
+        (result:any) => {
+          if (result['status'] == 200) {
+            this.toastr.success(result[1]);
+            this.router.navigate(['/'], { queryParams: { registered: true } });
+          } else {
+            this.toastr.error(result['message']);
           }
-          // if (data.status == 200) {
-          //   this.toastr.success(data['message']);
-          //   this.router.navigate(['/login'], { queryParams: { registered: true } });
-          // } else {
-          //   alert(data['message']);
-          // }
         },
         error => {
-          alert('something wrong, please check the details!');
+          this.toastr.error('something wrong, please check the details!');
         });
   }
 }

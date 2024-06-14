@@ -77,6 +77,10 @@ export class AuthService {
       httpOptions
     );
   }
+
+  public updateEmail(data:any, email:any) {
+    return data;
+  }
   
 
 }
