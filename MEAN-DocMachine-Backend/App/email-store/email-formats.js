@@ -297,7 +297,7 @@ td[class="spechide"]
                               <div>
                                 <p>Kind Regards</p>
                                 <p style="font-weight: bold">DocMachine</p>
-                                <p><a target='_blank' href="${dataObj.host}">bharathexim.com</a></p>
+                                <p><a target='_blank' href="${dataObj.host}">http://localhost:4200/</a></p>
                               </div>
                             </div>
                           </div>
