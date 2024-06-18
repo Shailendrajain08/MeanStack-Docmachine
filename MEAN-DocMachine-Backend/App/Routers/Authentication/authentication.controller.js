@@ -7,6 +7,7 @@ const speakeasy = require('speakeasy');
 const QRCode = require('qrcode');
 const UserModel = require("../../models/users.model").UserModel;
 const AuthModel = require("./authentication.model")
+const EmailTemplate = require("../../Model-Helper/email_template.js");
 
 
 function capitaliseFirstLetter(data) {
@@ -177,8 +178,40 @@ function userLogin(authString, callback) {
     });
 }
 
+function forgotpsw(emailId, callback) {
+    
+    EmailTemplate.sendForgotEmail({ emailId }, (err, res) => {
+        if (err) {
+            callback(err, null);
+        } else if (res) {
+            callback(null, res);
+        } else {
+            callback(null, null);
+        }
+    });
+}
+
+const resetpsw = (query, data, callback) => {
+    validators.hashPassword(data, function (err, hash) {
+        if (hash) {
+            console.log('Successfully hashed password');
+            data = hash;
+            UserModel.findOneAndUpdate({ emailId: query }, { password: data }).then((result) => {
+                callback(null, result)
+            }).catch((err)=> {
+                console.log(`Could Not hash password:`);
+                callback(null, null);
+            });
+        } else {
+            console.log(`Error while hashing password:`, err);
+        }
+    });
+};
+
 module.exports = {
     capitaliseFirstLetter: capitaliseFirstLetter,
     signUpUser: signUpUser,
-    userLogin: userLogin
+    userLogin: userLogin,
+    forgotpsw : forgotpsw,
+    resetpsw : resetpsw
 }

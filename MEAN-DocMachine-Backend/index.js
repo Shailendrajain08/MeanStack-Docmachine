@@ -11,7 +11,8 @@ const { connectDB } = require("./db.js");
 dotenv.config();
 
 const Auth = require('./App/Routers/Authentication/authentication.routes.js');
-const otp = require('./App/Routers/otp/otp.routes.js')
+const otp = require('./App/Routers/otp/otp.routes.js');
+const team = require('./App/Routers/team/team.routes.js');
 
 app.use(express.json())
 app.use(cookieParser())
@@ -34,8 +35,13 @@ app.use(
     passport.authenticate("jwt", { session: false }),
     otp
 );
+app.use(
+    "/api/team",
+    passport.authenticate("jwt", { session: false }),
+    team
+);
 
-app.listen(3000, () => console.log("Server started at port number: 3000"));
+app.listen(process.env.PORT, () => console.log(`Server started at port number: ${process.env.PORT}`));
 
 app.get('/', (req, res) => {
     res.send('server is ready')

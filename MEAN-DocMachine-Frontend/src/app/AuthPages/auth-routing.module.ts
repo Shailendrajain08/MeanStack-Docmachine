@@ -4,13 +4,17 @@ import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { TwoFactorAuthComponent } from './two-factor-auth/two-factor-auth.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
+import { NotVerifiedComponent } from './not-verified/not-verified.component';
+import { NewUserComponent } from './new-user/new-user.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { UpdatePasswordComponent } from './update-password/update-password.component';
 
 const routes: Routes = [
     {
         path: '',
         component: LoginComponent,
         pathMatch: 'full'
-    }, 
+    },
     {
         path: 'signUp',
         component: SignUpComponent,
@@ -25,7 +29,28 @@ const routes: Routes = [
         path: "verifyEmail/:id",
         component: VerifyEmailComponent,
         pathMatch: "full",
-      }
+    },
+    {
+        path: "notVerified",
+        component: NotVerifiedComponent,
+        pathMatch: "full"
+    },
+    {
+        path: "newUser",
+        component: NewUserComponent,
+        pathMatch: "full"
+    },
+    {
+        path: "forgotpassword",
+        component: ForgotPasswordComponent,
+        pathMatch: "full"
+    },
+    {
+      path: "updatePassword/:id",
+      component: UpdatePasswordComponent,
+      pathMatch: "full",
+    }
+
 ];
 
 @NgModule({
