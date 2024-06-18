@@ -126,18 +126,73 @@ router.put("/updateemail", (req, res) => {
 })
 
 router.put("/forgotpsw", (req, res) => {
-    UserModel.findOne({
-        emailId: req.body.emailId
-    }).then((user) => {
-        if (user) {
-            console.log(user)
-        }
-    }).catch((err)=> {
-        resp.errorResponse(
-            res,
-            err,
-            501,
-            "Internal Server Error, Please Try Again Later"
-        );
-    })
+    if (req.body.emailId) {
+        UserModel.findOne({
+            emailId: req.body.emailId
+        }).then((user) => {
+            if (user) {
+                AuthCtrl.forgotpsw(req.body.emailId, function (err, docs) {
+                    if (err) {
+                        resp.errorResponse(
+                            res,
+                            err,
+                            501,
+                            "Internal Server Error, Please Try Again Later"
+                        );
+                    } else if (docs) {
+                        resp.successPostResponse(
+                            res,
+                            null,
+                            `Password Reset Link Has Been Sent To Your Email Id ${req.body.emailId
+                            }`
+                        );
+                    } else {
+                        resp.noRecordsFound(res, "Invalid Email Id");
+                    }
+                });
+            } else {
+                resp.errorResponse(
+                    res,
+                    err,
+                    501,
+                    "User Not found with this emailId"
+                );
+            }
+        }).catch((err) => {
+            resp.errorResponse(
+                res,
+                err,
+                501,
+                "Internal Server Error, Please Try Again Later"
+            );
+        })
+    } else {
+        resp.missingBody(res, "Missing Body");
+    }
 })
+
+router.put("/updatepsw", (req, res) => {
+    if (req.body.emailId && req.body.newPassword) {
+        AuthCtrl.resetpsw(req.body.emailId, req.body.newPassword, function (err, docs) {
+            if (err) {
+                resp.errorResponse(
+                    res,
+                    err,
+                    501,
+                    "Internal Server Error, Please Try Again Later"
+                );
+            } else if (docs) {
+                resp.successPostResponse(
+                    res,
+                    null,
+                    `Password Has Been Updated Successfully`
+                );
+            } else {
+                resp.noRecordsFound(res, "Invalid Email Id");
+            }
+        })
+    } else {
+        resp.missingBody(res, "Missing Body");
+    }
+})
+

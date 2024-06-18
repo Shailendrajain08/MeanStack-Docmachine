@@ -74,7 +74,7 @@ export class SignUpComponent implements OnInit {
         });
     }
     else {
-      this.toastr.error('Please Accept Terms and Conditions!');
+      this.toastr.error('Accept Terms & Conditions!', 'Please Read and');
     }
   }
 

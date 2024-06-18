@@ -10,9 +10,10 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
 import { NotVerifiedComponent } from './not-verified/not-verified.component';
 import { NewUserComponent } from './new-user/new-user.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { UpdatePasswordComponent } from './update-password/update-password.component';
 
 @NgModule({
-  declarations: [SignUpComponent, LoginComponent, TwoFactorAuthComponent, VerifyEmailComponent, NotVerifiedComponent, NewUserComponent, ForgotPasswordComponent],
+  declarations: [SignUpComponent, LoginComponent, TwoFactorAuthComponent, VerifyEmailComponent, NotVerifiedComponent, NewUserComponent, ForgotPasswordComponent, UpdatePasswordComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,

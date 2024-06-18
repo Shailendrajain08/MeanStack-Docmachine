@@ -8,7 +8,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AuthService {
 
-  apiUrl = `http://localhost:3000/api`;
+  apiUrl = `http://localhost:8906/api`;
   public role: any;
   public authToken:any;
   public name: any;
@@ -23,17 +23,17 @@ export class AuthService {
   }
 
   public addToken(token: string) {
-    localStorage.setItem("token", token);
+    localStorage.setItem("DocMachinlogintoken", token);
     this.authToken = token;
   }
   public loadFromLocalStorage() {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("DocMachinlogintoken");
     this.authToken = token;
     return this.authToken;
   }
 
-  isLoggedIn(): any {
-    const token = localStorage.getItem("token");
+  public isLoggedIn(): any {
+    const token = localStorage.getItem("DocMachinlogintoken");
     this.authToken = token;
     if (this.authToken === null) {
       return false; 
@@ -42,8 +42,8 @@ export class AuthService {
     }
   }
 
-  getUserRole(): string | null {
-    const token = localStorage.getItem('authToken');
+  public getUserRole(): string | null {
+    const token = localStorage.getItem('DocMachinlogintoken');
     if (token) {
       const decodedToken = this.jwtHelper.decodeToken(token);
       console.log(decodedToken)
@@ -52,13 +52,13 @@ export class AuthService {
       return null;
     }
   }
-  register(user: any) {
+  public register(user: any) {
     return this.http.post(`${this.apiUrl}/authenticate/signup`, {
       user: user
     });
   }
 
-  login (loginData:any) {
+  public login (loginData:any) {
     const httpOptions = {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
@@ -73,7 +73,7 @@ export class AuthService {
     )
   }
 
-  verify(data:any) {
+  public verify(data:any) {
     this.loadFromLocalStorage();
     const httpOptions = {
       headers: new HttpHeaders({ Authorization: this.authToken }),
@@ -112,6 +112,13 @@ export class AuthService {
   public forgotpsw(loginData:any) {
     return this.http.put(`${this.apiUrl}/authenticate/forgotpsw`, {
       emailId: loginData,
+    });
+  }
+
+  public updatePsw(data:any, email:any) {
+    return this.http.put(`${this.apiUrl}/authenticate/updatepsw`, {
+      newPassword: data.password1,
+      emailId: email,
     });
   }
 }
