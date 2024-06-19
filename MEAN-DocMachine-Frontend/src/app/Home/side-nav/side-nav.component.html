@@ -1,0 +1,739 @@
+<div class="sidebar_left">
+    <nav id="sidebar" class="sidebar" role="navigation" style="overflow: auto; ">
+        <!-- need this .js class to initiate slimscroll -->
+        <div class="js-sidebar-content">
+            <header class="logo d-none d-md-block">
+                <a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page">
+                    <img class="mlogo" src="./assets/new-img/LogoFinal.png" />
+                </a>
+            </header>
+            <!-- seems like lots of recent admin template have this feature of user info in the sidebar.
+                 looks good, so adding it and enhancing with notifications -->
+
+            <!-- main notification links are placed inside of .sidebar-nav -->
+
+            <!-- every .sidebar-nav may have a title -->
+            <!-- <h5 class="sidebar-nav-title sidebar-title">MENU</h5> -->
+            <ul *ngIf="role == 'admin'" class="sidebar-nav">
+                <li class="">
+                    <!-- an example of nested submenu. basic bootstrap collapse component -->
+                    <a (click)="hideIncoice()" [routerLink]="['/home/power-admin/pending']" class="sidebar-content">
+                        <span class="icon side-icon">
+          <img src="./assets/layout-dashboard.png" />
+        </span> Admin User List
+                    </a>
+                </li>
+
+                <li class="">
+                    <a [routerLink]="['/home/power-admin/approved']" style="cursor: pointer" class="sidebar-content">
+                        <span class="icon side-icon">
+          <img src="./assets/briefcase.png" />
+        </span> Approved
+                    </a>
+                </li>
+                <li class="">
+                    <a [routerLink]="['/home/power-admin/declined']" style="cursor: pointer" class="sidebar-content">
+                        <span class="icon side-icon">
+          <img src="./assets/briefcase.png" />
+        </span> Declined
+                    </a>
+                </li>
+
+
+            </ul>
+            <ul *ngIf="role == 'ca'" class="sidebar-nav">
+                <li class="">
+                    <!-- an example of nested submenu. basic bootstrap collapse component -->
+                    <a (click)="hideIncoice()" [routerLink]="['/home/caDocuments/all']" class="sidebar-content">
+                        <span class="icon side-icon">
+          <img src="./assets/layout-dashboard.png" />
+        </span> All Document
+                    </a>
+                </li>
+
+                <li class="">
+                    <a [routerLink]="['/home/caDocuments/pending']" style="cursor: pointer" class="sidebar-content">
+                        <span class="icon side-icon">
+          <img src="./assets/briefcase.png" />
+        </span> Pending
+                    </a>
+                </li>
+                <li class="">
+                    <a [routerLink]="['/home/caDocuments/completed']" style="cursor: pointer" class="sidebar-content">
+                        <span class="icon side-icon">
+          <img src="./assets/briefcase.png" />
+        </span> Completed
+                    </a>
+                </li>
+
+            </ul>
+            <ul *ngIf="role != 'ca' && role != 'admin'" class="sidebar-nav">
+                <li class="" (click)="newTask5()" [ngClass]="status5 ? 'b-color1' : 'nothing'">
+                    <!-- an example of nested submenu. basic bootstrap collapse component -->
+                    <a (click)="hideIncoice()" [routerLink]="['/home/dashboardTask']" class="sidebar-content">
+                        <span class="icon side-icon">
+          <img src="./assets/new-img/dashboard.svg" />
+        </span> Dashboard
+                    </a>
+                </li>
+
+                <li style="cursor: pointer" (click)="newTask4()" [ngClass]="status4 ? 'b-color1' : 'nothing'">
+                    <a class="sidebar-content" style="cursor: pointer;">
+                        <span class="icon side-icon">
+                            <img src="./assets/new-img/Import.svg" />
+        </span> Import
+                        <span style="margin-left: 55%; position: absolute;
+                        transform:translate(0, 3px);">
+          <i style="font-size: 18px" *ngIf="!status4" class="fas fa-angle-right"></i>
+          <i style="font-size: 18px" *ngIf="status4" class="fas fa-angle-down"></i>
+        </span>
+                    </a>
+                </li>
+                <li class="manage-li" *ngIf="status4">
+                    <div class="main11">
+                        <div style="height: 30px; padding-top: 5px; font-size: 10px;">
+                            <span style="margin-left: 50px; font-size: 10px; color: #9ba4b0">Documents </span>
+                        </div>
+                        <hr style="margin-left:50px; background-color: #9ba4b0; margin-top:-2px;">
+                        <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top: -14px;" (click)="newTask()" [ngClass]="status ? 'b-color' : 'nothing'">
+                            <span style="margin-left: 50px; font-size: 12px; display: inline;  line-height: 30px;">PI/PO
+            <!-- <i style="font-size: 12px; margin-left: 48%;" *ngIf="status" class="fas fa-plus-circle">
+            </i>-->
+          </span>
+                        </div>
+                        <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top: -2px;" (click)="newTask21()" [ngClass]="statusS9 ? 'b-color' : 'nothing'">
+                            <span style="margin-left: 50px; line-height: 30px; font-size: 12px;">BOE</span>
+                        </div>
+                        <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top: -2px;" (click)="newTask2()" [ngClass]="status2 ? 'b-color' : 'nothing'">
+                            <span style="margin-left: 50px; line-height: 30px; font-size: 12px;">Credit Notes</span>
+                        </div>
+
+                        <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-2px;" (click)="newTask3()" [ngClass]="status3 ? 'b-color' : 'nothing'">
+                            <span style="margin-left: 50px; font-size: 12px; line-height: 30px;">Debit notes</span>
+                        </div>
+
+                        <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-2px;" (click)="newTask22()" [ngClass]="statusS4 ? 'b-color' : 'nothing'">
+                            <span style="margin-left: 50px; line-height: 30px; font-size: 12px;">Insurance Documents</span>
+                        </div>
+
+                        <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-2px;" (click)="newTask23()" [ngClass]="statusS7 ? 'b-color' : 'nothing'">
+                            <span style="margin-left: 50px; font-size: 12px; line-height: 30px;">Tri party agreements</span>
+                        </div>
+
+                        <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-2px;" [ngClass]="statusS5 ? 'b-color' : 'nothing'">
+                            <span style="margin-left: 50px; font-size: 12px; line-height: 30px;">Letter of credit (LC)</span>
+                        </div>
+
+                        <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-2px;" [ngClass]="statusS6 ? 'b-color' : 'nothing'">
+                            <span style="margin-left: 50px; line-height: 30px; font-size: 12px;">Master service agree</span>
+                        </div>
+
+
+                        <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-2px;" [ngClass]="statusS8 ? 'b-color' : 'nothing'">
+                            <span style="margin-left: 50px; line-height: 30px; font-size: 12px;">Opinion Reports</span>
+                        </div>
+
+                        <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-2px;">
+                            <span style="margin-left: 50px; font-size: 10px; line-height: 30px; color: #9ba4b0">Transactions</span>
+
+                        </div>
+                        <hr style="margin-left:50px; background-color: #9ba4b0; margin-top:-2px;">
+
+                        <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-12px;" [routerLink]="['/home/advance-outward-remittance']">
+                            <span style="margin-left: 50px; line-height: 30px; font-size: 12px;">Advance Outward Remittance </span>
+                        </div>
+
+                        <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-2px;" [routerLink]="['/home/direct-import-payment']">
+                            <span style="margin-left: 50px; line-height: 30px; font-size: 12px;">Direct Import Payment
+          </span>
+                        </div>
+                    <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-2px;" [routerLink]="['/home/a2cum-application-yesbank']">
+                            <span style="margin-left: 50px; line-height: 30px; font-size: 12px;">A2cum Application
+      </span>
+                        </div>
+                    <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-2px;" [routerLink]="['/home/fbg-waiver']">
+                            <span style="margin-left: 50px; line-height: 30px; font-size: 12px;">FBG Waiver</span>
+                        </div>
+                    <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-2px;" [routerLink]="['/home/lc-isurance']">
+                            <span style="margin-left: 50px; line-height: 30px; font-size: 12px;">LC-Insurence</span>
+                        </div>
+                    <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-2px;" [routerLink]="['/home/buyer-credit']">
+                            <span style="margin-left: 50px; line-height: 30px; font-size: 12px;">Buyer Credit</span>
+                        </div>
+
+                        <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-2px;" (click)="buc()">
+                            <span style="margin-left: 50px; line-height: 30px; font-size: 12px;">Bills Under Collection</span>
+                        </div>
+                        <li style="list-style: none;">
+                            <div *ngIf="billuc" style="margin: -10px 0px 10px 70px;">
+                                <a class="hoverClass" style="cursor: pointer; font-size: 11px;" (click)="lcSight()">Sight</a>
+                                <a class="hoverClass" style="cursor: pointer; font-size: 11px;" (click)="lcUsance()">Usance</a>
+                            </div>
+                        </li>
+                        <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-2px;" (click)="buc1()">
+                            <span style="margin-left: 50px; font-size: 13px; line-height: 30px;">Bills Under LC</span>
+                        </div>
+                        <li>
+                            <div *ngIf="billuc1" style="margin: -10px 0px 10px 70px;">
+                                <a class="hoverClass" style="cursor: pointer; font-size: 11px;" (click)="nonlcSight()">Sight</a>
+                                <a class="hoverClass" style="cursor: pointer; font-size: 11px;" (click)="nonlcUsance()">Usance</a>
+                            </div>
+                        </li>
+                    </div>
+                </li>
+
+                <!--
+            <li class="manage-li" *ngIf="mt">
+                <div class="main11" style=" color: #fff; margin-left: 5px;"></div>
+            </li> -->
+
+                <li style="cursor: pointer" class="" (click)="newTask7()" [ngClass]="status7 ? 'b-color1' : 'nothing'" id="export">
+                    <a class="sidebar-content" style="cursor: pointer;">
+                        <span class="icon side-icon">
+                            <img src="./assets/new-img/export.svg" />
+                    </span> Export
+                        <span style="margin-left: 55%;position: absolute;transform: translate(0, 3px);">
+                        <i style="font-size: 18px" *ngIf="!status7" class="fas fa-angle-right"></i>
+                        <i style="font-size: 18px" *ngIf="status7" class="fas fa-angle-down"></i>
+                    </span>
+                    </a>
+                </li>
+                <li class="manage-li" *ngIf="status7">
+                    <div class="main11">
+                        <div style="height: 30px; padding-top: 5px; font-size: 10px;">
+                            <span style="margin-left: 50px; font-size: 10px; color: #9ba4b0">Documents </span>
+                        </div>
+                        <hr style="margin-left:50px; background-color: #9ba4b0; margin-top:-2px;">
+                        <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top: -14px;" [ngClass]="new ? 'b-color' : 'nothing'" (click)="newTask1()">
+                            <span style="margin-left: 50px; font-size: 12px; display: inline;  line-height: 30px;">PI/PO
+        <i style="font-size: 12px; margin-left: 48%;" *ngIf="status" class="fas fa-plus-circle">
+        </i>
+      </span>
+                        </div>
+                        <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top: -2px;" (click)="newSub1()" [ngClass]="new1 ? 'b-color' : 'nothing'">
+                        <span style="margin-left: 50px; line-height: 30px; font-size: 12px;" [routerLink]="['/home/view-document/sb']">Shipping Bill</span>
+                        </div>
+                        <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top: -2px;" (click)="newSub2()" [ngClass]="new2 ? 'b-color' : 'nothing'">
+                        <span style="margin-left: 50px; line-height: 30px; font-size: 12px;" [routerLink]="['/home/credit-note']">Credit Notes</span>
+                        </div>
+
+                        <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-2px;" (click)="newSub3()" [ngClass]="new3? 'b-color' : 'nothing'">
+                        <span style="margin-left: 50px; font-size: 12px; line-height: 30px;" [routerLink]="['/home/debit-note']">Debit Notes</span>
+                        </div>
+
+                        <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-2px;" (click)="newSub4()" [ngClass]="new4 ? 'b-color' : 'nothing'">
+                        <span style="margin-left: 50px; line-height: 30px; font-size: 12px;" [routerLink]="['/home/insurance-document']">Insurance Documents</span>
+                        </div>
+
+                        <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-2px;" (click)="newSub5()" [ngClass]="new5 ? 'b-color' : 'nothing'">
+                        <span style="margin-left: 50px; font-size: 12px; line-height: 30px;" [routerLink]="['/home/letterofcredit-lc']">Letter of Credit (LC)</span>
+                        </div>
+
+                        <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-2px;" (click)="newSub6()" [ngClass]="new6 ? 'b-color' : 'nothing'">
+                            <span style="margin-left: 50px; line-height: 30px; font-size: 12px;" [routerLink]="['/home/master-services']">Master Service Agreement</span>
+                        </div>
+
+                        <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-2px;" (click)="newSub7()" [ngClass]="new7? 'b-color' : 'nothing'">
+                        <span style="margin-left: 50px; font-size: 12px; line-height: 30px;" [routerLink]="['/home/try-party']">
+                            Triparty Agreements</span>
+                        </div>
+
+                        <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-2px;" (click)="newSub8()" [ngClass]="new8 ? 'b-color' : 'nothing'">
+                            <span style="margin-left: 50px; line-height: 30px; font-size: 12px;" [routerLink]="['/home/opinion-report']">Opinion Reports</span>
+                        </div>
+
+                        <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-2px;" (click)="newSub14()" [ngClass]="new14 ? 'b-color' : 'nothing'">
+                        <span style="margin-left: 50px; line-height: 30px; font-size: 12px;" [routerLink]="['/home/inward-remittance-advice']">Inward Remittance Advice</span>
+                        </div>
+
+                        <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-2px;" (click)="newSub22()" [ngClass]="new22 ? 'b-color' : 'nothing'">
+                        <span style="margin-left: 50px; line-height: 30px; font-size: 12px;" [routerLink]="['/home/airway-bl-copy']">Airway/BL Copy</span>
+                        </div>
+                        <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-2px;" (click)="newSub23()" [ngClass]="new23 ? 'b-color' : 'nothing'">
+                        <span style="margin-left: 50px; line-height: 30px; font-size: 12px;" [routerLink]="['/home/bill-of-exchange']">Bill Of Exchange</span>
+                        </div>
+                        <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-2px;" (click)="newSub24()" [ngClass]="new24 ? 'b-color' : 'nothing'">
+                            <span style="margin-left: 50px; line-height: 30px; font-size: 12px;" [routerLink]="['/home/destruction']">Destruction Certificate</span>
+                        </div>
+                        <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-2px;" (click)="newSub25()" [ngClass]="new25 ? 'b-color' : 'nothing'">
+                            <span style="margin-left: 50px; line-height: 30px; font-size: 12px;" [routerLink]="['/home/commercial']">Commercial Documents</span>
+                        </div>
+                        <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-2px;" (click)="newSub26()" [ngClass]="new26 ? 'b-color' : 'nothing'">
+                        <span style="margin-left: 50px; line-height: 30px; font-size: 12px;" [routerLink]="['/home/packing-list']">Packing List Documents</span>
+                        </div>
+
+                        <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-2px;">
+                            <span style="margin-left: 50px; font-size: 10px; line-height: 30px; color: #9ba4b0">Transactions</span>
+
+                        </div>
+                        <hr style="margin-left:50px; background-color: #9ba4b0; margin-top:-2px;">
+
+                        <div class="main11">
+                            <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-12px;" (click)="newSub9()" [ngClass]="new9 ? 'b-color' : 'nothing'">
+                            <span style="margin-left: 50px; line-height: 30px; font-size: 12px;" [routerLink]="['/home/export-home']">Inward Remittance
+          Disposal</span>
+                            </div>
+                            <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-2px;" (click)="newSub10()" [ngClass]="new10 ? 'b-color' : 'nothing'">
+                            <span style="margin-left: 50px; line-height: 30px; font-size: 12px;" [routerLink]="['/home/bill-lodgement']">Bill Under
+          Collection</span>
+                            </div>
+                            <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-2px;" (click)="newSub11()" [ngClass]="new11 ? 'b-color' : 'nothing'">
+                            <span style="margin-left: 50px; line-height: 30px; font-size: 12px;" [routerLink]="['/home/bill-lodgement']">Bill Under
+          LC</span>
+                            </div>
+
+                            <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-2px;" (click)="newSub12()" [ngClass]="new12 ? 'b-color' : 'nothing'">
+                            <span style="margin-left: 50px; line-height: 30px; font-size: 12px;" [routerLink]="['/home/packing-credit-request']">Packing Credit Request</span>
+                            </div>
+                            <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-2px;" (click)="newSub13()" [ngClass]="new13 ? 'b-color' : 'nothing'">
+                            <span style="margin-left: 50px; line-height: 30px; font-size: 12px;" [routerLink]="['/home/packing-credit-request']">Direct Dispatch</span>
+                            </div>
+
+                        </div>
+
+                        <div style="height: 30px; padding-top: 5px; font-size: 10px;">
+                            <span style="margin-left: 50px; font-size: 10px; color: #9ba4b0">EDPMS </span>
+                        </div>
+                        <hr style="margin-left:50px; background-color: #9ba4b0; margin-top:-2px;">
+                        <div class="main11">
+                            <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-2px; " (click)="newSub20() " [ngClass]="new20 ? 'b-color' : 'nothing' ">
+                                <span style="margin-left: 50px; line-height: 30px; font-size: 12px; ">EDPMS Recon</span></div>
+                            <div class="hoverClass " style="cursor: pointer; height: 30px; margin-top:-2px; " (click)="newSub21() " [ngClass]="new21 ? 'b-color' : 'nothing' ">
+                                <span style="margin-left: 50px; line-height: 30px; font-size: 12px; ">EDPMS Recon Table</span></div>
+                        </div>
+                    </div>
+                </li>
+
+
+
+                <!-- <li style="cursor: pointer " class=" " *ngIf="!mt1 " (click)="manageTask1() ">
+      <a class="sidebar-content " style="cursor: pointer; ">
+        <span class="icon side-icon ">
+          <img src="./assets/content-paper-edit.png " />
+        </span> Manage Tasks
+                    <span style=" margin-left: 7%; position: absolute; transform: translate(0, 3px); "><i style="font-size: 20px; margin-left: 50px; " *ngIf="!mt "
+            class="fas fa-angle-right "></i>
+        </span>
+                </a>
+            </li>
+
+            <li class="manage-li " *ngIf="mt1 ">
+                <a style="cursor: pointer " class="manage-content " (click)="manageTask1() ">
+                    <span class="icon side-icon ">
+          <img src="./assets/content-paper-edit.png " />
+        </span> Manage Tasks
+                    <span style=" margin-left: 7%; position: absolute; transform: translate(0, 3px); ">
+          <i style="font-size: 20px " *ngIf="mt " class="fas fa-angle-up "></i></span>
+                </a>
+                <div class="main11 " style="margin-left: 50px; ">
+                    <a style="cursor: pointer " (click)="newTask1() ">
+          New Task
+          <span style="margin-left: 14% "><i *ngIf="!nt1 " class="fas fa-angle-down "></i>
+            <i *ngIf="nt " class="fas fa-angle-up "></i></span>
+        </a>
+                    <div class="main1 " *ngIf="nt1 ">
+                        <a style="cursor: pointer " (click)="export() "> Exports </a>
+                        <div class="main2 " *ngIf="exp ">
+                            <a style="cursor: pointer" [routerLink]="['/home/export-home']">Inward Remittance Disposal</a>
+                            <a style="cursor: pointer" [routerLink]="['/home/bill-lodgement']">Bill Lodgement</a>
+                            <a style="cursor: pointer" [routerLink]="['/home/packing-credit-request']">Packing Credit Request</a>
+                        </div>
+                        <a style="cursor: pointer " [routerLink]="[ '/home/inwardRemmitance'] ">
+            Inward Remittance
+          </a>
+
+                        <a style="cursor: pointer " (click)="import() "> Imports </a>
+                        <div class="main2 " *ngIf="imp ">
+                            <a style="cursor: pointer " [routerLink]="[ '/home/advance-outward-remittance'] ">Advance Outward
+              Remittance</a>
+                            <a style="cursor: pointer " [routerLink]="[ '/home/direct-import-payment'] ">Direct Import Payment</a>
+                            <a style="cursor: pointer " (click)="buc() ">Bills Under Collection</a>
+                            <div class="main2 " *ngIf="billuc ">
+
+                                <a style="cursor: pointer " (click)="lcSight() ">Sight</a>
+                                <a style="cursor: pointer " (click)="lcUsance() ">Usance</a>
+
+
+                            </div>
+                            <a style="cursor: pointer " (click)="buc1() ">Bills Under LC</a>
+                            <div class="main2 " *ngIf="billuc1 ">
+
+                                <a style="cursor: pointer " (click)="nonlcSight() ">Sight</a>
+                                <a style="cursor: pointer " (click)="nonlcUsance() ">Usance</a>
+                            </div>
+                            <a style="cursor: pointer" [routerLink]="['/home/buyer-credit']">Buyers Credit Request</a>
+                            <a style="cursor: pointer" (click)="lcIsurance()">LC Issuance</a>
+                            <div class="main2 " *ngIf="lcI ">
+                                <a style="cursor: pointer " (click)="lcInland() ">Inland</a>
+                                <a style="cursor: pointer " (click)="lcImport() ">Import</a>
+                            </div>
+                            <a style="cursor: pointer ">BOE Submission to Bank</a>
+                            <a style="cursor: pointer" [routerLink]="['/home/fbg-waiver']">FBG Waiver</a>
+                        </div>
+                        <a style="cursor: pointer " (click)="outward() " [routerLink]="[ '/home/outward-remitance'] ">
+            Outward Remittance
+          </a>
+
+                        <a style="cursor: pointer " (click)="other() "> Others </a>
+                        <div class="main2 " *ngIf="others ">
+                            <a style="cursor: pointer ">GR Waiver</a>
+                            <a style="cursor: pointer ">Writeoff</a>
+                            <a style="cursor: pointer ">EEFC conversion request</a>
+                            <a style="cursor: pointer ">Net Off/Set Off</a>
+                        </div>
+                    </div>
+                    <a style="cursor: pointer " [routerLink]="[ '/home/tasks/completed'] ">
+          Completed Task
+        </a>
+
+        <a style="cursor: pointer " [routerLink]="[ '/home/tasks/pending'] "> Draft </a>
+      </div>
+    </li> -->
+                <!-- <li class=" " style="cursor: pointer ">
+      <a class="sidebar-content " [routerLink]="[ '/home/outward-remitance'] ">
+        <span class="icon side-icon ">
+          <img src="./assets/content-paper-edit.png " />
+        </span>
+        Outward Remittance non Imports
+      </a>
+    </li>
+    <li class=" " style="cursor: pointer ">
+      <a class="sidebar-content " [routerLink]="[ '/home/inwardRemmitance'] ">
+        <span class="icon side-icon ">
+          <img src="./assets/content-paper-edit.png " />
+        </span>
+        Inward Remittance
+      </a>
+    </li> -->
+
+                <!-- <li style="cursor: pointer " class=" " (click)="idpmsTask() ">
+      <a class="sidebar-content " style="cursor: pointer; ">
+        <span class="icon side-icon ">
+          <img src="./assets/content-paper-edit.png " />
+        </span>
+        IDPMS
+        <span style=" margin-left: 55%; position: absolute; transform: translate(0, 3px); "><i style="font-size: 18px " *ngIf="!mt3 " class="fas fa-angle-right "></i><i
+            style="font-size: 18px " *ngIf="mt3 " class="fas fa-angle-down "></i>
+        </span>
+      </a>
+    </li>
+    <li class="manage-li " *ngIf="mt3 ">
+
+      <div class="main11 " style=" color: #fff; margin-left: 5px; ">
+        <div class="hoverClass " style="cursor: pointer; padding-top: 5px; ">
+          <span style="margin-left: 50px; font-size: 12px; ">Upload Latest File</span>
+        </div>
+        <div class="hoverClass " style="cursor: pointer; padding-top: 5px; ">
+          <span style="margin-left: 50px; font-size: 12px; ">Upload Advance Remittance</span>
+        </div>
+        <div class="hoverClass " style="cursor: pointer; padding-top: 5px; ">
+          <span style="margin-left: 50px; font-size: 12px; ">Create Match</span>
+        </div>
+
+
+      </div>
+    </li>
+
+    <li style="cursor: pointer " class=" " (click)="edpmsTask() ">
+      <a class="sidebar-content " style="cursor: pointer; ">
+        <span class="icon side-icon ">
+          <img src="./assets/content-paper-edit.png " />
+        </span>
+        EDPMS
+        <span style=" margin-left: 55%; position: absolute; transform: translate(0, 3px); "><i style="font-size: 18px " *ngIf="!mt4 " class="fas fa-angle-right "></i><i
+            style="font-size: 18px " *ngIf="mt4 " class="fas fa-angle-down "></i>
+        </span>
+      </a>
+    </li>
+    <li class="manage-li " *ngIf="mt4 ">
+      <div class="main11 " style=" color: #fff; margin-left: 5px; ">
+        <div class="hoverClass " style="cursor: pointer; padding-top: 5px; ">
+          <span style="margin-left: 50px; font-size: 12px; ">Upload Latest File</span>
+        </div>
+        <div class="hoverClass " style="cursor: pointer; padding-top: 5px; ">
+          <span style="margin-left: 50px; font-size: 12px; ">Upload Advance Remittance</span>
+        </div>
+        <div class="hoverClass " style="cursor: pointer; padding-top: 5px; ">
+          <span style="margin-left: 50px; font-size: 12px; ">Create Match</span>
+        </div>
+
+
+      </div>
+    </li> -->
+
+                <li (click)="newTask6() " [ngClass]="status6 ? 'b-color1' : 'nothing' ">
+                    <a [routerLink]="[ '/home/upload'] " style="cursor: pointer " class="sidebar-content ">
+                        <span class="icon side-icon ">
+                            <img src="./assets/new-img/upload.svg " />
+    </span> Upload Documents
+                    </a>
+                </li>
+
+                <li class=" " style="cursor: pointer " *ngIf="role=='manager' " (click)="newTask8() " [ngClass]="status8 ? 'b-color1' : 'nothing' ">
+                    <a class="sidebar-content " [routerLink]="[ '/home/manageUser'] ">
+                        <span class="icon side-icon ">
+                            <img src="./assets/new-img/user.svg " />
+                 </span> Manage User
+                    </a>
+                </li>
+
+                <li style="cursor: pointer " class=" " (click)="newTask9() " [ngClass]="status9 ? 'b-color1' : 'nothing' ">
+                    <a class="sidebar-content ">
+                        <span class="icon side-icon ">
+                            <img src="./assets/new-img/transport.svg " />
+                    </span> Transaction
+                    </a>
+                </li>
+                <li style="cursor: pointer " (click)="newTask10() " [ngClass]="status10 ? 'b-color1' : 'nothing' ">
+                    <a class="sidebar-content " style="cursor: pointer; ">
+                        <span class="icon side-icon ">
+                            <img src="./assets/new-img/manager-cus.svg " />
+                    </span> Manage Customer
+                        <span style="margin-left: 19%;position: absolute;transform: translate(0, 3px); ">
+                        <i style="font-size: 18px " *ngIf="!status10 " class="fas fa-angle-right "></i>
+                        <i style="font-size: 18px " *ngIf="status10 " class="fas fa-angle-down "></i>
+                    </span>
+                    </a>
+                </li>
+                <li class="manage-li " *ngIf="status10 ">
+                    <div class="main11 ">
+                        <div class="hoverClass " style="cursor: pointer; height: 30px; margin-top: 0px; " (click)="newSub15() " [ngClass]="new15 ? 'b-color' : 'nothing' ">
+                        <span style="margin-left: 50px; line-height: 30px; font-size: 12px;" [routerLink]="['/home/manage-customer/import']">Import</span>
+                        </div>
+                        <div class="hoverClass " style="cursor: pointer; height: 30px; margin-top: 0px; " (click)="newSub16() " [ngClass]="new16 ? 'b-color' : 'nothing' ">
+                        <span style="margin-left: 50px; line-height: 30px; font-size: 12px;" [routerLink]="['/home/manage-customer/export']">Export</span>
+                        </div>
+                    </div>
+                </li>
+
+                <li style="cursor: pointer " (click)="newTask11() " [ngClass]="status11 ? 'b-color1' : 'nothing' ">
+                    <a class="sidebar-content " style="cursor: pointer; ">
+                        <span class="icon side-icon ">
+                        <img src="./assets/new-img/Document.svg " />
+                    </span> View Document
+                        <span style="margin-left: 27%;position: absolute;transform: translate(0, 3px); ">
+                        <i style="font-size: 18px " *ngIf="!status11 " class="fas fa-angle-right "></i>
+                        <i style="font-size: 18px " *ngIf="status11 " class="fas fa-angle-down "></i>
+                   </span>
+                    </a>
+                </li>
+                <li class="manage-li " *ngIf="status11 ">
+                    <div class="main11 ">
+                        <div class="hoverClass " style="cursor: pointer; height: 30px; margin-top: 0px; " (click)="newSub17() " [ngClass]="new17 ? 'b-color' : 'nothing' ">
+                        <span style="margin-left: 50px; line-height: 30px; font-size: 12px;" [routerLink]="['/home/view-document/sb']">Shipping Bill</span>
+                        </div>
+                        <div class="hoverClass " style="cursor: pointer; height: 30px; margin-top: 0px; " (click)="newSub18() " [ngClass]="new18 ? 'b-color' : 'nothing' ">
+                        <span style="margin-left: 50px; line-height: 30px; font-size: 12px;" [routerLink]="['/home/view-document/boe']">BOE Documents</span>
+                        </div>
+                        <div class="hoverClass " style="cursor: pointer; height: 30px; margin-top: 0px; " (click)="newSub19() " [ngClass]="new19 ? 'b-color' : 'nothing' ">
+                        <span style="margin-left: 50px; line-height: 30px; font-size: 12px;" [routerLink]="['/home/view-document/pipo']">PI/PO Documents</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+
+            <!-- <h5 class="sidebar-nav-title sidebar-title ">SUPPORT</h5> -->
+            <ul style="cursor: pointer " class="sidebar-nav ">
+                <li class=" " (click)="newTask12() " [ngClass]="status12 ? 'b-color1' : 'nothing' ">
+                    <a class="sidebar-content " [routerLink]="[ '/home/help'] ">
+                        <span class="icon side-icon ">
+                            <img src="./assets/new-img/help.svg " />
+      </span> Need Help?
+                    </a>
+                </li>
+                <li style="cursor: pointer " class=" " (click)="newTask13() " [ngClass]="status13 ? 'b-color1' : 'nothing' ">
+                    <a class="sidebar-content ">
+                        <span class="icon side-icon ">
+                            <img src="./assets/new-img/contact-us.svg " />
+      </span> Contact Us
+                    </a>
+                </li>
+                <li style="cursor: pointer " class=" " (click)="newTask17() " [ngClass]="status17 ? 'b-color1' : 'nothing' ">
+                    <a class="sidebar-content " [routerLink]="[ '/home/t&c'] ">
+                        <span class="icon side-icon ">
+                            <img src="./assets/new-img/condition.svg " />
+    </span> Terms & Condition
+                    </a>
+                </li>
+
+            </ul>
+            <footer>
+                <h5 class="footer-heading ">DocMachine 2020.</h5>
+                <p class="footer-content ">
+                    Created with love for the community <br /> of designers and project managers.
+                </p>
+            </footer>
+        </div>
+    </nav>
+</div>
+<!-- This is the white navigation bar seen on the top. A bit enhanced BS navbar. See .page-controls in _base.scss. -->
+<div class="main_nave">
+    <div class="top_spavce"></div>
+    <div class="main_nave_haeders">
+        <nav class="navbar-dashboard">
+            <div class="container-fluid">
+                <!-- .navbar-header contains links seen on xs & sm screens -->
+                <div class="row ">
+                    <div class="col-md-8 col-sm-8 col-xs-7 ">
+                        <div class=" ">
+                            <!-- search form! link it to your search server -->
+                            <form class="search_box_new_sec" role="search ">
+                                <div class="form-group ">
+                                    <div class="input-group input-group-no-border ">
+                                        <input id="main-search " type="text " placeholder="Type to search. . . " />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-5 ">
+                        <div class="language_options_right ">
+                            <div class="language_options ">
+                                <select style="cursor: pointer " class="dropdown " name="cars " id="cars ">
+              <option value="volvo ">English</option>
+              <option value="saab ">Hindi</option>
+              <option value="opel ">Kannada</option>
+              <option value="audi ">Tamil</option>
+            </select>
+                            </div>
+                            <div class="notfication ">
+                                <ul>
+                                    <li><a routerLink="/second-component " routerLinkActive="active " ariaCurrentWhenActive="page "><span class="icon ">
+                                    <img src="./assets/new-img/header_not1.svg"/>
+                                  </span></a></li>
+                                    <li>
+                                        <a routerLink="/second-component " routerLinkActive="active " ariaCurrentWhenActive="page ">
+                                            <span class="icon "><img src="./assets/new-img/header-user.svg " />
+                                  </span>
+                                        </a>
+                                        <div class="after_login_drop_down">
+                                            <div class="user_icons_top">
+                                                <div class="left_user_pic">
+                                                    <img class="manager" src="./assets/new-img/user_pice.png" alt="" />
+                                                </div>
+                                                <div class="left_user_info">
+                                                    <h5 class="name">{{name}}</h5>
+                                                    <label class="admin_manager">Manager</label>
+                                                    <h6 class="side-name" *ngIf="role == 'admin'">Admin</h6>
+
+                                                    <h6 class="side-name" *ngIf="role == 'ca'">CA</h6>
+                                                    <h6 class="side-name" *ngIf="role == 'member'">Member</h6>
+                                                </div>
+                                            </div>
+                                            <ul>
+                                                <li *ngIf="role !='ca' " style="cursor: pointer " class=" " (click)="newTask14() " [ngClass]="status14 ? 'b-color1' : 'nothing' ">
+                                                    <!-- an example of nested submenu. basic bootstrap collapse component -->
+                                                    <a class="sidebar-content " [routerLink]="[ '/home/account'] ">
+                                                        <span class="account_icon">Account</span>
+                                                    </a>
+                                                </li>
+                                                <li><a routerLink="/second-component " routerLinkActive="active " ariaCurrentWhenActive="page "><span class="setting_icon">Settings</span></a></li>
+                                                <li style="cursor: pointer " class=" " (click)="newTask16() " [ngClass]="status16 ? 'b-color1' : 'nothing' ">
+                                                    <!-- an example of nested submenu. basic bootstrap collapse component -->
+                                                    <a class="sidebar-content " (click)="logout() ">
+                                                        <span class="logout_icons">
+                                                  </span> Log Out
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- this part is hidden for xs screens -->
+            </div>
+        </nav>
+    </div>
+</div>
+<router-outlet>
+    <app-confirm-dialog></app-confirm-dialog>
+</router-outlet>
+<!-- <div class="content-wrap ">
+
+        <main id="content " class="content " role="main ">
+
+            <h1>hekkko</h1>
+            <div class="analytics " style="width: 83%; ">
+                <div class="analytics-side ">
+                    <div class="row ">
+                        <div class="col-12 mb-lg ">
+                            <section class="widget pb-0 ">
+
+                                <div class="widget-body p-0 support table-wrapper ">
+                                    <table class="table table-striped mb-0 ">
+                                        <thead>
+                                        <tr class="text-muted ">
+                                            <th scope="col "><span class=" pl-3 ">DATE</span></th>
+                                            <th scope="col ">SB ID</th>
+                                            <th scope="col ">INVOICE NUMBER</th>
+                                            <th scope="col ">COMPANY NAME</th>
+                                            <th scope="col ">UPLOADED BY</th>
+                                            <th scope="col ">AMOUNT</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="text-dark ">
+                                        <tr>
+                                            <th class="pl-4 fw-normal ">Mark Otto</th>
+                                            <td>ottoto@wxample.com</td>
+                                            <td>ON the Road</td>
+                                            <td>$25 224.2</td>
+                                            <td>11 May 2017</td>
+                                            <td>Otsego</td>
+
+                                        </tr>
+                                        <tr>
+                                            <th class="pl-4 ">Jacob Thornton</th>
+                                            <td>thornton@wxample.com</td>
+                                            <td>HP Core i7</td>
+                                            <td>$1 254.2</td>
+                                            <td>4 Jun 2017</td>
+                                            <td>Fivepointville</td>
+
+                                        </tr>
+                                        <tr>
+                                            <th class="pl-4 ">Larry the Bird</th>
+                                            <td>bird@wxample.com</td>
+                                            <td>Air Pro</td>
+                                            <td>$1 570.0</td>
+                                            <td>27 Aug 2017</td>
+                                            <td>Leadville North</td>
+
+                                        </tr>
+                                        <tr>
+                                            <th class="pl-4 ">Joseph May</th>
+                                            <td>josephmay@wxample.com</td>
+                                            <td>Version Control</td>
+                                            <td>$5 224.5</td>
+                                            <td>19 Feb 2018</td>
+                                            <td>Seaforth</td>
+
+                                        </tr>
+                                        <tr>
+                                            <th class="pl-4 ">Peter Horadnia</th>
+                                            <td>horadnia@wxample.com</td>
+                                            <td>Let's Dance</td>
+                                            <td>$43 594.7</td>
+                                            <td>1 Mar 2018</td>
+                                            <td>Hanoverton</td>
+
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+    </div> -->
+<!-- The Loader. Is shown when pjax happens -->
+<div class="loader-wrap hiding hide ">
+    <i class="fa fa-circle-o-notch fa-spin-fast "></i>
+</div>

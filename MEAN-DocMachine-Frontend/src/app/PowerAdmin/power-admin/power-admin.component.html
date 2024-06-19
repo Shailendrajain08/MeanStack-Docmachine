@@ -1,1 +1,239 @@
-<h1>Power Admin Works</h1>
+<div class="main_nave">
+  <div class="main_nave_haeders">
+    <nav class="navbar-dashboard">
+      <div class="container-fluid">
+        <!-- .navbar-header contains links seen on xs & sm screens -->
+        <div class="row">
+          <div class="col-md-8 col-sm-8 col-xs-7">
+            <div class="inline-elements">
+              <!-- search form! link it to your search server -->
+              <a
+                routerLink="/"
+                routerLinkActive="active"
+                ariaCurrentWhenActive="page"
+                style="margin-left: 2%"
+              >
+                <img
+                  class="mlogo"
+                  src="./assets/new-img/LogoFinal.png"
+                />
+              </a>
+
+              <form class="search_box_new_sec" role="search ">
+                <div class="form-group">
+                  <div class="input-group input-group-no-border">
+                    <input
+                      class="serch_input"
+                      id="main-search "
+                      style="justify-content:center; width:800px"
+                      type="text "
+                      placeholder="Type to search. . . "
+                    />
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-5">
+            <div class="language_options_right">
+              <div class="language_options">
+                <select
+                  style="cursor: pointer"
+                  class="dropdown"
+                  name="cars "
+                  id="cars "
+                >
+                  <option value="volvo ">English</option>
+                  <option value="saab ">Hindi</option>
+                  <option value="opel ">Kannada</option>
+                  <option value="audi ">Tamil</option>
+                </select>
+              </div>
+              <div class="notfication">
+                <ul>
+                  <li>
+                    <a
+                      routerLink="/second-component "
+                      routerLinkActive="active "
+                      ><span class="icon">
+                        <img src="./assets/new-img/header_not1.svg" /> </span
+                    ></a>
+                  </li>
+                  <li>
+                    <a
+                      routerLink="/second-component "
+                      routerLinkActive="active "
+                    >
+                      <span class="icon"
+                        ><img src="./assets/new-img/header-user.svg " />
+                      </span>
+                    </a>
+                    <div class="after_login_drop_down">
+                      <div class="user_icons_top">
+                        <div class="left_user_pic">
+                          <img
+                            class="manager"
+                            src="./assets/new-img/user_pice.png"
+                            alt=""
+                          />
+                        </div>
+                        <div class="left_user_info">
+                          <h5 class="name">{{ name }}</h5>
+                          <h6 class="side-name">Admin</h6>
+                        </div>
+                      </div>
+                      <ul>
+                        <!--<li *ngIf="role !='ca' " style="cursor: pointer " class=" " (click)="newTask14() " [ngClass]="status14 ? 'b-color1' : 'nothing' ">
+                                                     an example of nested submenu. basic bootstrap collapse component 
+                                                    <a class="sidebar-content " [routerLink]="[ '/home/account'] ">
+                                                        <span class="account_icon">Account</span>
+                                                    </a>
+                                                </li>-->
+                        <li>
+                          <a
+                            routerLink="/second-component "
+                            routerLinkActive="active "
+                            ><span class="setting_icon">Settings</span></a
+                          >
+                        </li>
+                        <li
+                          style="cursor: pointer"
+                          class=" "
+                          (click)="newTask()"
+                          [ngClass]="status ? 'b-color1' : 'nothing'"
+                        >
+                          <!-- an example of nested submenu. basic bootstrap collapse component -->
+                          <a class="sidebar-content" (click)="logout()">
+                            <span class="logout_icons"> </span> Log Out
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- this part is hidden for xs screens -->
+      </div>
+    </nav>
+  </div>
+</div>
+
+<div class="content-wrap">
+  <main id="content" class="content table-padding" role="main">
+    <div class="analytics" style="width: 90%">
+      <div style="width: 100%" class="analytics-side">
+        <div class="row">
+          <div class="col-12 mb-lg padding">
+            <section class="widget pb-0 box-shadow">
+              <div class="widget-body p-0 support table-wrapper">
+                <table class="table mb-0">
+                  <thead style="border-bottom: 1px solid #e3e6ee;">
+                    <tr class="text-muted table-heading">
+                      <th scope="col"><span class="pl-3">Date</span></th>
+                      <th scope="col">Customer's Name</th>
+                      <th scope="col">Role</th>
+                      <th scope="col">Company Name</th>
+                      <th scope="col">Status</th>
+                    </tr>
+                  </thead>
+                  <!--  -->
+                  <tbody *ngIf="pending" class="text-dark">
+                    <tr
+                      class="table-row"
+                      *ngFor="let data of value; let i = index"
+                    >
+                      <th class="pl-4 fw-normal">{{ data.date }}</th>
+                      <td>{{ data.fullName }}</td>
+                      <td>{{ data.role }}</td>
+                      <td>{{ data.companyName }}</td>
+                      <td>
+                        <button
+                          class="button"
+                          style="margin-right: 10px"
+                          (click)="submit(data._id, data.emailId)"
+                        >
+                          Approve
+                        </button>
+                        <button
+                          class="button"
+                          style="background-color: orange; margin-right: 10px"
+                          (click)="decline(data._id, data.emailId)"
+                        >
+                          Decline
+                        </button>
+                        <button
+                          class="button"
+                          style="background-color: red"
+                          (click)="delete(data._id, i)"
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody *ngIf="approved" class="text-dark">
+                    <tr
+                      class="table-row"
+                      *ngFor="let data of value; let i = index"
+                    >
+                      <th class="pl-4 fw-normal">{{ data.date }}</th>
+                      <td>{{ data.fullName }}</td>
+                      <td>{{ data.role }}</td>
+                      <td>{{ data.companyName }}</td>
+                      <td>
+                        <button
+                          class="button"
+                          style="margin-right: 10px"
+                          (click)="submit(data._id,  data.emailId)"
+                        >
+                          Revoke
+                        </button>
+                        <button
+                          class="button"
+                          style="background-color: red"
+                          (click)="delete(data._id, i)"
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody *ngIf="declined" class="text-dark">
+                    <tr
+                      class="table-row"
+                      *ngFor="let data of value; let i = index"
+                    >
+                      <th class="pl-4 fw-normal">{{ data.date }}</th>
+                      <td>{{ data.fullName }}</td>
+                      <td>{{ data.role }}</td>
+                      <td>{{ data.companyName }}</td>
+                      <td>
+                        <button
+                          class="button"
+                          style="margin-right: 10px"
+                          (click)="submit(data._id, data.emailId)"
+                        >
+                          Approve
+                        </button>
+                        <button
+                          class="button"
+                          style="background-color: red"
+                          (click)="delete(data._id, i)"
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

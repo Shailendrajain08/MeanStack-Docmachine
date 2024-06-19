@@ -6,7 +6,7 @@ export const routes: Routes = [
         loadChildren: () => import('./AuthPages/auth.module').then(m => m.AuthModule)
     },
     {
-        path: 'power-admin',
+        path: 'power-admin/:file',
         loadChildren: () => import('./PowerAdmin/power-admin.module').then(m=>m.PowerAdminModule)
     }
 ];

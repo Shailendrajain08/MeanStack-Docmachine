@@ -70,10 +70,12 @@ export class LoginComponent implements OnInit {
       this.authService.login(this.loginForm.value)
         .subscribe(
           (data: any) => {
+            console.log(data)
             this.authService.addLoginData(data);
             this.data = data
             if (data['result']) {
               this.authService.addToken(data['result'].token);
+              this.authService.addRole(data['result'].role)
               if (data['result']['dataURL']) {
                 this.router.navigate(['/2FA']);
               } else {
@@ -96,8 +98,10 @@ export class LoginComponent implements OnInit {
           })
     } else {
       this.authService.verify(this.value).subscribe((data:any) => {
-        if (this.data1['data'][0].emailId == 'shailendra.jain0894@gmail.com' || this.data1['data'][0].emailId == 'jain.shailendra0894@gmail.com') {
-          this.router.navigate(['/home/power-admin/pending'])
+        console.log("Logged In user data",this.data)
+        // if (this.data1['data'][0].emailId == 'shailendra.jain0894@gmail.com' || this.data1['data'][0].emailId == 'jain.shailendra0894@gmail.com') {
+        if(this.data['result']['role'] == 'admin'){  
+        this.router.navigate(['power-admin']) //home/power-admin/pending
         } else {
           if (this.data1['data'][0]['emailIdVerified']) {
             if (this.data1['data'][0]['verified'] == 'yes') {

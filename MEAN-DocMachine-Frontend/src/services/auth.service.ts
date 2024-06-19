@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { BehaviorSubject } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { jwtDecode } from "jwt-decode"
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +17,7 @@ export class AuthService {
   public loginData = new BehaviorSubject({});
   token: any; 
   private jwtHelper = new JwtHelperService();
+  public userRole : any;
 
   constructor(private http : HttpClient) { }
 
@@ -26,36 +29,36 @@ export class AuthService {
     localStorage.setItem("DocMachinlogintoken", token);
     this.authToken = token;
   }
+
+  public addRole (role : any) {
+    const userRole = localStorage.setItem("DocMachinloginRole", role);
+    this.userRole = userRole
+    return this.userRole
+  }
   public loadFromLocalStorage() {
     const token = localStorage.getItem("DocMachinlogintoken");
     this.authToken = token;
     return this.authToken;
   }
 
-  public isLoggedIn(): any {
-    const token = localStorage.getItem("DocMachinlogintoken");
-    this.authToken = token;
-    if (this.authToken === null) {
-      return false; 
-    } else {
-      return true;
-    }
-  }
-
-  public getUserRole(): string | null {
-    const token = localStorage.getItem('DocMachinlogintoken');
-    if (token) {
-      const decodedToken = this.jwtHelper.decodeToken(token);
-      console.log(decodedToken)
-      return decodedToken?.role || null; // Check for a 'role' property and return it, otherwise null
-    } else {
-      return null;
-    }
-  }
   public register(user: any) {
     return this.http.post(`${this.apiUrl}/authenticate/signup`, {
       user: user
     });
+  }
+
+  public getCurrentUser() {
+    const role:any = localStorage.getItem('DocMachinloginRole');
+    return role; 
+  }
+
+  public isAuthenticated(): boolean {
+    return !!this.getCurrentUser();
+  }
+
+  hasRole(role: string): boolean {
+    const userrole = this.getCurrentUser();
+    return userrole == role ? true : false;
   }
 
   public login (loginData:any) {
@@ -121,4 +124,17 @@ export class AuthService {
       emailId: email,
     });
   }
+
+  public getAllUser() {
+    return this.http.get(`${this.apiUrl}/authenticate/getAllUser`).toPromise();
+  }
+
+  public updateOneUser(data:any, value:any, emailId:any) {
+    return this.http.put(`${this.apiUrl}/authenticate/updateOneUser`, {
+      _id: data,
+      data: value,
+      emailId: emailId
+    });
+  }
+  
 }

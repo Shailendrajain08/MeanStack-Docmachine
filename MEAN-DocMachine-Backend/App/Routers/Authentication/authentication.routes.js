@@ -194,5 +194,43 @@ router.put("/updatepsw", (req, res) => {
     } else {
         resp.missingBody(res, "Missing Body");
     }
+});
+
+router.get("/getAllUser", (req, res) => {
+    UserModel.find().then((doc) => {
+        res.status(200)
+            .json({
+                message: "All User getting successfully",
+                data: doc
+            })
+    }).catch((err) => {
+        console.log('Error in retreving :' + JSON.stringify(err, undefined, 2))
+    })
+})
+
+router.put("/updateOneUser", (req, res) => {
+    console.log(req.body)
+    UserModel.updateOne({
+        _id: req.body._id
+    }, { $set: { "verified": req.body.data } }).then((user)=> {
+        if (req.body.data == 'yes') {
+            console.log("yes");
+
+            var content = 'Your account is verified by DocMachine, please use this emailId as your username'
+        } else if (req.body.data == 'no') {
+            console.log("no");
+            var content = 'Your account is taken back by DocMachine'
+        } else if (req.body.data == 'declined') {
+            console.log("no");
+            res.status(200)
+                .json({
+                    message: "Account Declined successfully",
+                    data: user
+                });
+            return
+        }
+    }).catch((err)=> {
+        console.log(err)
+    })
 })
 
