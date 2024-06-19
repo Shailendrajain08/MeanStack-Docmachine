@@ -16,7 +16,7 @@ export class TwoFactorAuthComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService,
               private router: Router, private toastr : ToastrService) {
-    
+
   }
 
   ngOnInit(): void {
@@ -32,7 +32,7 @@ export class TwoFactorAuthComponent implements OnInit {
       .subscribe(
         (result:any) => {
           if (result['status'] == 200) {
-            this.toastr.success(result[1]);
+            this.toastr.success(result['message']);
             this.router.navigate(['/'], { queryParams: { registered: true } });
           } else {
             this.toastr.error(result['message']);
