@@ -212,7 +212,7 @@ router.put("/updateOneUser", (req, res) => {
     console.log(req.body)
     UserModel.updateOne({
         _id: req.body._id
-    }, { $set: { "verified": req.body.data } }).then((user)=> {
+    }, { $set: { "verified": req.body.data } }).then((user) => {
         if (req.body.data == 'yes') {
             console.log("yes");
 
@@ -229,8 +229,36 @@ router.put("/updateOneUser", (req, res) => {
                 });
             return
         }
-    }).catch((err)=> {
-        console.log(err)
+        const html = EmailFormat.generalFormat({ html: content, heading: "User Approval" });
+        let transporter = nodemailer.createTransport({
+            service: 'gmail', // Use your email service
+            auth: {
+                user: process.env.EMAIL_USER, // Your email
+                pass: process.env.EMAIL_PASSWORD // Your email password
+            }
+        });
+
+        const mailOptions = {
+            to: req.body.emailId, // Change to your recipient
+            from: "shailendra.jain0894@gmail.com", // Change to your verified sender
+            subject: "Account verified by DocMachine",
+            text: "New User Registered",
+            html: html
+        };
+
+        // Send mail with defined transport object
+        let info = transporter.sendMail(mailOptions);
+        res.status(200)
+            .json({
+                message: "Updated successfully",
+                data: user
+            })
+    }).catch((err) => {
+        res.status(400)
+            .json({
+                message: "Not verified",
+                data: resp
+            })
     })
 })
 
