@@ -208,10 +208,20 @@ const resetpsw = (query, data, callback) => {
     });
 };
 
+const getProfile = (user) => {
+    return new Promise((resolve, reject) => {
+        AuthModel.getProfileDetailsById({ _id: user._id }).then(
+            (data) => resolve(data),
+            (err) => reject(err)
+        )
+    })
+};
+
 module.exports = {
     capitaliseFirstLetter: capitaliseFirstLetter,
     signUpUser: signUpUser,
     userLogin: userLogin,
     forgotpsw : forgotpsw,
-    resetpsw : resetpsw
+    resetpsw : resetpsw,
+    getProfile : getProfile
 }

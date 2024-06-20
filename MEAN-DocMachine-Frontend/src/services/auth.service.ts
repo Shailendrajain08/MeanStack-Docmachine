@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { BehaviorSubject } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { jwtDecode } from "jwt-decode"
+import { jwtDecode } from "jwt-decode";
 
 
 @Injectable({
@@ -12,16 +12,17 @@ export class AuthService {
 
   apiUrl = `http://localhost:8906/api`;
   public role: any;
-  public authToken:any;
+  public authToken: any;
   public name: any;
   public loginData = new BehaviorSubject({});
-  token: any; 
+  token: any;
   private jwtHelper = new JwtHelperService();
-  public userRole : any;
+  public userRole: any;
+  public user_id:any
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  public addLoginData (data: {}) {
+  public addLoginData(data: {}) {
     this.loginData.next(data)
   }
 
@@ -30,15 +31,22 @@ export class AuthService {
     this.authToken = token;
   }
 
-  public addRole (role : any) {
+  public addRole(role: any) {
     const userRole = localStorage.setItem("DocMachinloginRole", role);
     this.userRole = userRole
     return this.userRole
   }
+
   public loadFromLocalStorage() {
     const token = localStorage.getItem("DocMachinlogintoken");
     this.authToken = token;
     return this.authToken;
+  }
+
+  public loadFromLocalStorage2() {
+    const token2: any = localStorage.getItem("DocMachinlogintoken");
+    this.user_id = jwtDecode(token2);
+    return this.user_id;
   }
 
   public register(user: any) {
@@ -48,8 +56,8 @@ export class AuthService {
   }
 
   public getCurrentUser() {
-    const role:any = localStorage.getItem('DocMachinloginRole');
-    return role; 
+    const role: any = localStorage.getItem('DocMachinloginRole');
+    return role;
   }
 
   public isAuthenticated(): boolean {
@@ -61,7 +69,7 @@ export class AuthService {
     return userrole == role ? true : false;
   }
 
-  public login (loginData:any) {
+  public login(loginData: any) {
     const httpOptions = {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
@@ -70,13 +78,13 @@ export class AuthService {
       }),
     };
     return this.http.post(
-      `${this.apiUrl}/authenticate/login`, 
+      `${this.apiUrl}/authenticate/login`,
       null,
       httpOptions
     )
   }
 
-  public verify(data:any) {
+  public verify(data: any) {
     this.loadFromLocalStorage();
     const httpOptions = {
       headers: new HttpHeaders({ Authorization: this.authToken }),
@@ -104,21 +112,21 @@ export class AuthService {
     );
   }
 
-  public updateEmail(data:any, email:any) {
+  public updateEmail(data: any, email: any) {
     return this.http.put(`${this.apiUrl}/authenticate/updateemail`, {
       data: data,
       emailId: email,
-  });
-  
+    });
+
   }
 
-  public forgotpsw(loginData:any) {
+  public forgotpsw(loginData: any) {
     return this.http.put(`${this.apiUrl}/authenticate/forgotpsw`, {
       emailId: loginData,
     });
   }
 
-  public updatePsw(data:any, email:any) {
+  public updatePsw(data: any, email: any) {
     return this.http.put(`${this.apiUrl}/authenticate/updatepsw`, {
       newPassword: data.password1,
       emailId: email,
@@ -129,12 +137,35 @@ export class AuthService {
     return this.http.get(`${this.apiUrl}/authenticate/getAllUser`).toPromise();
   }
 
-  public updateOneUser(data:any, value:any, emailId:any) {
+  public updateOneUser(data: any, value: any, emailId: any) {
     return this.http.put(`${this.apiUrl}/authenticate/updateOneUser`, {
       _id: data,
       data: value,
       emailId: emailId
     });
   }
-  
+
+  public deleteUser(id: any) {
+    return this.http.post(`${this.apiUrl}/authenticate/deleteUser`, {
+      id: id
+    });
+  }
+
+  getUserDetail() {
+    this.loadFromLocalStorage2();
+    console.log(this.authToken);
+    const httpOptions = {
+      headers: new HttpHeaders({ Authorization: this.token, _id:this.user_id }),
+    };
+    return this.http
+      .get(`${this.apiUrl}/authenticate/profile`, httpOptions)
+      .toPromise();
+  }
+
+  public logout() {
+    this.authToken = null;
+    this.userRole = null
+    localStorage.clear();
+  }
+
 }

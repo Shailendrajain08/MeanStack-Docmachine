@@ -8,7 +8,7 @@ const EmailTemplate = require("../../Model-Helper/email_template.js");
 const EmailFormat = require("../../email-store/email-formats.js");
 const fs = require('fs');
 const nodemailer = require('nodemailer');
-// const aws = require("aws-sdk");
+const misc = require('../../Healpers/misc.js')
 
 
 router.post("/signup", (req, res) => {
@@ -262,3 +262,33 @@ router.put("/updateOneUser", (req, res) => {
     })
 })
 
+router.post("/deleteUser", function (req, res) {
+    if (req.body) {
+        UserModel.deleteOne({ _id: req.body.id })
+            .then((result) => {
+                res.status(200)
+                    .json({
+                        message: "User Deleted Successfully",
+                        data: result
+                    })
+            }).catch((err) => {
+                res.status(404)
+                    .json({
+                        message: "Something went wrong",
+                        data: err
+                    })
+            })
+    } else {
+        resp.missingBody(res, "Missing Body");
+    }
+})
+
+router.get("/profile", (req, res) => {
+        console.log(req)
+    // misc.checkUser(, res).then((user) => {
+    //     AuthCtrl.getProfile(user).then(
+    //     (data) => resp.successGetResponse(res, data),
+    //     (err) => resp.errorResponse(res, err)
+    //   );
+    // });
+});

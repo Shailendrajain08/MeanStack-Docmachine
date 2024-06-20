@@ -42,7 +42,8 @@
 }
 
 .language_options_right {
-  margin-left: 60%;
+  margin-right: 50px;
+  float: right;
 }
 
 .language_options {
@@ -235,7 +236,7 @@
 .setting_icon {
   display: inline-block;
   vertical-align: middle;
-  background: url("/./assets/new-img/settings.svg") no-repeat 1px 3px;
+  background: url("../../../assets/new-img/settings.svg") no-repeat 1px 3px;
   padding: 0 0 0 31px;
   background-size: 15px;
   height: 20px;
@@ -248,7 +249,7 @@
 .logout_icons {
   display: inline-block;
   vertical-align: middle;
-  background: url("/./assets/new-img/log-out.svg") no-repeat;
+  background: url("../../../assets/new-img/log-out.svg") no-repeat;
   padding: 0 0 0 31px;
   background-size: 15px;
   height: 20px;
@@ -282,6 +283,26 @@ input:focus,
 textarea:focus,
 select:focus {
   outline: none;
+}
+
+.pages-links{
+  margin-left: 2%;
+  margin-top: 15px;
+  display: inline-flex;
+}
+
+.pages-links a{
+  text-decoration: none;
+  color: #323e4a;
+  padding-left: 30px;
+  z-index: 1;
+  list-style-type: none;
+}
+
+.pages-links a:hover{
+  color: #49a2d7;
+  font-size: 20px;
+  cursor: pointer;
 }
 
 .upload-button {

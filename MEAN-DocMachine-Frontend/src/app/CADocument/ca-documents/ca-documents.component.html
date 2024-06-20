@@ -29,11 +29,11 @@
                   </div>
                 </div>
               </form>
-              <div class="pages-links">
+              <!-- <div class="pages-links">
                 <a *ngIf="!approved" href="/power-admin/approved"> Approved</a>
                 <a *ngIf="!pending" href="/power-admin/pending"> Pending</a>
                 <a *ngIf="!declined" href="/power-admin/declined"> Declined</a>
-              </div>
+              </div> -->
             </div>
           </div>
           <div class="col-md-4 col-sm-4 col-xs-5">
@@ -83,16 +83,16 @@
                         </div>
                         <div class="left_user_info">
                           <h5 class="name">{{ name }}</h5>
-                          <h6 class="side-name">Admin</h6>
+                          <h6 class="side-name">CA</h6>
                         </div>
                       </div>
                       <ul>
                         <!--<li *ngIf="role !='ca' " style="cursor: pointer " class=" " (click)="newTask14() " [ngClass]="status14 ? 'b-color1' : 'nothing' ">
-                                                     an example of nested submenu. basic bootstrap collapse component 
-                                                    <a class="sidebar-content " [routerLink]="[ '/home/account'] ">
-                                                        <span class="account_icon">Account</span>
-                                                    </a>
-                                                </li>-->
+                                                       an example of nested submenu. basic bootstrap collapse component 
+                                                      <a class="sidebar-content " [routerLink]="[ '/home/account'] ">
+                                                          <span class="account_icon">Account</span>
+                                                      </a>
+                                                  </li>-->
                         <li>
                           <a
                             routerLink="/second-component "
@@ -125,116 +125,110 @@
   </div>
 </div>
 
-<div class="content-wrap">
+<div style="margin-left: 0px" class="content-wrap">
   <main id="content" class="content table-padding" role="main">
-    <div class="analytics" style="width: 90%">
-      <div style="width: 100%" class="analytics-side">
-        <div class="row">
-          <div style="margin-left: 8%; margin-bottom: 10px; color:#49a2d7; text-decoration: underline">
-            <h2 *ngIf="approved">Approved User</h2>
-            <h2 *ngIf="pending">Pending For Approval</h2>
-            <h2 *ngIf="declined">Declined User</h2>
-          </div>
-          <div class="col-12 mb-lg padding">
-            <section class="widget pb-0 box-shadow">
-              <div class="widget-body p-0 support table-wrapper">
-                <table class="table mb-0">
-                  <thead style="border-bottom: 1px solid #e3e6ee">
+    <div class="analytics">
+      <div *ngIf="!showInvoice" style="width: 100%" class="analytics-side">
+        <div style="width: 100%" class="row">
+          <div
+            style="width: 100%; margin: 0 -1.5%"
+            *ngIf="!showInvoice"
+            class="col-12 mb-lg padding"
+          >
+            <section
+              style="width: 100%; margin-left: 0"
+              class="widget pb-0 box-shadow"
+            >
+              <div
+                style="margin: 0 -2%"
+                class="widget-body p-0 support table-wrapper"
+              >
+                <table style="width: 100%" class="table table-striped mb-0">
+                  <thead style="width: 100%">
                     <tr class="text-muted table-heading">
-                      <th scope="col"><span class="pl-3">Date</span></th>
-                      <th scope="col">Customer's Name</th>
-                      <th scope="col">Role</th>
-                      <th scope="col">Company Name</th>
-                      <th scope="col">Status</th>
+                      <th class="rect">
+                        <img src="../../../assets/Rectangle-13.png" />
+                      </th>
+                      <th scope="col"><span class="pl-3">DATE</span></th>
+                      <th scope="col">PI/PO No.</th>
+                      <th scope="col">Purpose Code</th>
+                      <th scope="col">Bank Name</th>
+                      <th scope="col" *ngIf="pending || completed">Upload</th>
                     </tr>
                   </thead>
-                  <!--  -->
-                  <tbody *ngIf="pending" class="text-dark">
-                    <tr
-                      class="table-row"
-                      *ngFor="let data of value; let i = index"
-                    >
-                      <th class="pl-4 fw-normal">{{ data.date }}</th>
-                      <td>{{ data.fullName }}</td>
-                      <td>{{ data.role }}</td>
-                      <td>{{ data.companyName }}</td>
+                  <tbody
+                    *ngFor="let data of item1; let i = index"
+                    class="text-dark"
+                  >
+                    <tr *ngIf="all" class="table-row">
+                      <th class="rect">
+                        <img src="../../../assets/Rectangle-13.png" />
+                      </th>
+                      <th class="pl-4 fw-normal">{{ data.transactionDate }}</th>
+                      <td class="sb-no">{{ data.pi_poNo }}</td>
                       <td>
-                        <button
-                          class="button"
-                          style="margin-right: 10px"
-                          (click)="submit(data._id, data.i, data.emailId)"
-                        >
-                          Approve
-                        </button>
-                        <button
-                          class="button"
-                          style="background-color: orange; margin-right: 10px"
-                          (click)="decline(data._id, data.i, data.emailId)"
-                        >
-                          Decline
-                        </button>
-                        <button
-                          class="button"
-                          style="background-color: red"
-                          (click)="delete(data._id, i)"
-                        >
-                          Delete
-                        </button>
+                        {{ data.file }}
+                      </td>
+                      <td>{{ data.bank }}</td>
+                    </tr>
+                    <tr
+                      *ngIf="pending && data.caDone == 'no'"
+                      class="table-row"
+                    >
+                      <th class="rect" (click)="viewTask(data)">
+                        <img src="../../../assets/Rectangle-13.png" />
+                      </th>
+                      <th class="pl-4 fw-normal" (click)="viewTask(data)">
+                        {{ data.transactionDate }}
+                      </th>
+                      <td class="sb-no" (click)="viewTask(data)">
+                        {{ data.pi_poNo }}
+                      </td>
+                      <td (click)="viewTask(data)">
+                        {{ data.file }}
+                      </td>
+                      <td (click)="viewTask(data)">{{ data.bank }}</td>
+                      <td>
+                        <form method="POST">
+                          <div>
+                            <!-- <input class="customfile1" (error)="onUploadError($event)" placeholder="Choose File" (init)="onUploadInit($event)" (success)="onUploadSuccess($event)" (click)="clicked(data)" *ngIf="type === 'directive'" [dropzone]="config">
+                                                          -->
+                            <!--<p class="choose">Choose File</p> -->
+                            <ngx-dropzone (change)="onSelect($event)">
+                              <ngx-dropzone-label
+                                >Drop your files here!</ngx-dropzone-label
+                              >
+                              <ngx-dropzone-preview
+                                *ngFor="let f of files"
+                                [removable]="true"
+                                (removed)="onRemove(f)"
+                              >
+                                <ngx-dropzone-label
+                                  >{{ f.name }} ({{
+                                    f.type
+                                  }})</ngx-dropzone-label
+                                >
+                              </ngx-dropzone-preview>
+                            </ngx-dropzone>
+                          </div>
+                        </form>
                       </td>
                     </tr>
-                  </tbody>
-                  <tbody *ngIf="approved" class="text-dark">
+
                     <tr
+                      *ngIf="completed && data.caDone == 'yes'"
                       class="table-row"
-                      *ngFor="let data of value; let i = index"
                     >
-                      <th class="pl-4 fw-normal">{{ data.date }}</th>
-                      <td>{{ data.fullName }}</td>
-                      <td>{{ data.role }}</td>
-                      <td>{{ data.companyName }}</td>
+                      <th class="rect">
+                        <img src="../../../assets/Rectangle-13.png" />
+                      </th>
+                      <th class="pl-4 fw-normal">{{ data.transactionDate }}</th>
+                      <td class="sb-no">{{ data.pi_poNo }}</td>
                       <td>
-                        <button
-                          class="button"
-                          style="margin-right: 10px"
-                          (click)="submit(data._id, data.i, data.emailId)"
-                        >
-                          Revoke
-                        </button>
-                        <button
-                          class="button"
-                          style="background-color: red"
-                          (click)="delete(data._id, i)"
-                        >
-                          Delete
-                        </button>
+                        {{ data.file }}
                       </td>
-                    </tr>
-                  </tbody>
-                  <tbody *ngIf="declined" class="text-dark">
-                    <tr
-                      class="table-row"
-                      *ngFor="let data of value; let i = index"
-                    >
-                      <th class="pl-4 fw-normal">{{ data.date }}</th>
-                      <td>{{ data.fullName }}</td>
-                      <td>{{ data.role }}</td>
-                      <td>{{ data.companyName }}</td>
-                      <td>
-                        <button
-                          class="button"
-                          style="margin-right: 10px"
-                          (click)="submit(data._id, data.i, data.emailId)"
-                        >
-                          Approve
-                        </button>
-                        <button
-                          class="button"
-                          style="background-color: red"
-                          (click)="delete(data._id, i)"
-                        >
-                          Delete
-                        </button>
-                      </td>
+                      <td>{{ data.bank }}</td>
+                      <td>Done</td>
                     </tr>
                   </tbody>
                 </table>

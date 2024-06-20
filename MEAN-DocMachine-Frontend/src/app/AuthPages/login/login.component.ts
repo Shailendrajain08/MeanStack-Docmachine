@@ -109,7 +109,7 @@ export class LoginComponent implements OnInit {
                 this.toastr.success(data['message']);
                 if (this.data['result']['role'] == 'ca') {
                   this.authService.role = this.data['result']['role'];
-                  this.router.navigate(['/home/caDocuments/all'])
+                  this.router.navigate(['caDocuments'])
                 } else {
                   this.authService.role = this.data['result']['role'];
                   if (this.data1['data'][0].companyId) {

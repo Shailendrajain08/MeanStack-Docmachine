@@ -56,9 +56,19 @@ const login = (query, callback) => {
     })
 };
 
+const getProfileDetailsById = (query) => {
+    return new Promise((resolve, reject) => {
+        UserModel.findOne(query).then(
+            (data) => resolve(data),
+            (err) => reject(err)
+        )
+    })
+};
+
 
 
 module.exports = {
     addUser: addUser,
-    login : login
+    login : login, 
+    getProfileDetailsById : getProfileDetailsById
 }
