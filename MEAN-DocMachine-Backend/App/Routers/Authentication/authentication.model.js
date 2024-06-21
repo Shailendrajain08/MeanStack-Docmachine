@@ -11,20 +11,20 @@ const addUser = (user, callback) => {
         .then((result) => {
             if (!result) {
                 callback(err, null);
-            }else if(result){
-            let resp = JSON.parse(JSON.stringify(result));
-            if (delete resp.password) {
-                EmailTemplate.sendVerifyEmail( user , (err, res) => {
-                    if (err) {
-                        callback(err, null);
-                    } else if (res) {
-                        callback(null, res);
-                    } else {
-                        callback(null, null);
-                    }
-                });
+            } else if (result) {
+                let resp = JSON.parse(JSON.stringify(result));
+                if (delete resp.password) {
+                    EmailTemplate.sendVerifyEmail(user, (err, res) => {
+                        if (err) {
+                            callback(err, null);
+                        } else if (res) {
+                            callback(null, res);
+                        } else {
+                            callback(null, null);
+                        }
+                    });
                 } else {
-                    EmailTemplate.sendVerifyEmail( user , (err, res) => {
+                    EmailTemplate.sendVerifyEmail(user, (err, res) => {
                         if (err) {
                             callback(err, null);
                         } else if (res) {
@@ -36,7 +36,7 @@ const addUser = (user, callback) => {
                 }
 
             }
-            })
+        })
         .catch((err) => {
             console.error(err);
             callback(err, null);
@@ -45,23 +45,27 @@ const addUser = (user, callback) => {
 };
 
 const login = (query, callback) => {
-    UserModel.find(query).then((result)=> {
+    UserModel.find(query).then((result) => {
         if (result.length > 0) {
             callback(null, result);
         } else {
             callback("User Model Result", "Invalid email");
         }
     }).catch((err) => {
-            callback(err, null);
+        callback(err, null);
     })
 };
 
-const getProfileDetailsById = (query) => {
-    return new Promise((resolve, reject) => {
-        UserModel.findOne(query).then(
-            (data) => resolve(data),
-            (err) => reject(err)
-        )
+function getProfileDetailsById(user, callback) {
+    UserModel.findOne({_id:user._id}).then((user) => {
+        if (user) {
+            callback(null, user);
+        } else {
+            callback(null, null);
+        }
+    }).catch((err) => {
+        console.log("error while getting user:", err);
+        callback(err, null);
     })
 };
 
@@ -69,6 +73,6 @@ const getProfileDetailsById = (query) => {
 
 module.exports = {
     addUser: addUser,
-    login : login, 
-    getProfileDetailsById : getProfileDetailsById
+    login: login,
+    getProfileDetailsById: getProfileDetailsById
 }

@@ -83,7 +83,7 @@
                         </div>
                         <div class="left_user_info">
                           <h5 class="name">{{ name }}</h5>
-                          <h6 class="side-name">CA</h6>
+                          <h6 class="side-name">{{role}}</h6>
                         </div>
                       </div>
                       <ul>
@@ -191,8 +191,7 @@
                       <td>
                         <form method="POST">
                           <div>
-                            <!-- <input class="customfile1" (error)="onUploadError($event)" placeholder="Choose File" (init)="onUploadInit($event)" (success)="onUploadSuccess($event)" (click)="clicked(data)" *ngIf="type === 'directive'" [dropzone]="config">
-                                                          -->
+                             <input class="customfile1" (error)="onUploadError($event)" placeholder="Choose File" (init)="onUploadInit($event)" (success)="onUploadSuccess($event)" (click)="clicked(data)" *ngIf="type === 'directive'" [dropzone]="config">
                             <!--<p class="choose">Choose File</p> -->
                             <ngx-dropzone (change)="onSelect($event)">
                               <ngx-dropzone-label

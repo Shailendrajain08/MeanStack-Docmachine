@@ -12,14 +12,13 @@ const resp = require('./respHelper');
 
 const checkUser = (prop, res) => {
     return new Promise((resolve, reject) => {
-        console.log("prop",prop.headers.authorization)
-        // if(prop.headers.authorization){
-        //     resolve(prop.user[0]._doc || prop.user[0]._doc);
-        // }
-        // else{
-        //     resp.errorResponse({success: false, message: "User Not found"});
-        //     // reject()
-        // }
+        if(prop.headers._id){
+            resolve(prop.headers._id);
+        }
+        else{
+            resp.errorResponse({success: false, message: "User Not found"});
+            reject()
+        }
     })
 };
 

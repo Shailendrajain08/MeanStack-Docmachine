@@ -208,12 +208,15 @@ const resetpsw = (query, data, callback) => {
     });
 };
 
-const getProfile = (user) => {
-    return new Promise((resolve, reject) => {
-        AuthModel.getProfileDetailsById({ _id: user._id }).then(
-            (data) => resolve(data),
-            (err) => reject(err)
-        )
+function getProfile (user, callback) {
+    AuthModel.getProfileDetailsById(user, (err,res) => {
+        if (err) {
+            callback(err, null);
+        } else if (res) {
+            callback(null, res);
+        } else {
+            callback(null, null);
+        }
     })
 };
 

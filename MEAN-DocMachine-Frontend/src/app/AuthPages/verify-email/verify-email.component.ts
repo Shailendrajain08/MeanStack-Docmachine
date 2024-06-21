@@ -32,8 +32,6 @@ export class VerifyEmailComponent implements OnInit {
       this.authService.updateEmail('a', this.email)
         .subscribe(
           (data:any) => {
-            console.log("king123")
-            console.log(data)
             if (data) {
               this.toggle = true;
               this.toastr.success('Email Verification done');

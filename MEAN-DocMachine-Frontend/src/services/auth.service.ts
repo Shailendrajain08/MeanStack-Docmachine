@@ -152,14 +152,12 @@ export class AuthService {
   }
 
   getUserDetail() {
-    this.loadFromLocalStorage2();
-    console.log(this.authToken);
+    this.loadFromLocalStorage();
+    this.user_id = jwtDecode(this.authToken);
     const httpOptions = {
-      headers: new HttpHeaders({ Authorization: this.token, _id:this.user_id }),
+      headers: new HttpHeaders({ Authorization: this.authToken, _id:this.user_id._id }),
     };
-    return this.http
-      .get(`${this.apiUrl}/authenticate/profile`, httpOptions)
-      .toPromise();
+    return this.http.get(`${this.apiUrl}/authenticate/profile`, httpOptions)   
   }
 
   public logout() {

@@ -70,7 +70,6 @@ export class LoginComponent implements OnInit {
       this.authService.login(this.loginForm.value)
         .subscribe(
           (data: any) => {
-            console.log(data)
             this.authService.addLoginData(data);
             this.data = data
             if (data['result']) {
@@ -98,7 +97,6 @@ export class LoginComponent implements OnInit {
           })
     } else {
       this.authService.verify(this.value).subscribe((data:any) => {
-        console.log("Logged In user data",this.data)
         // if (this.data1['data'][0].emailId == 'shailendra.jain0894@gmail.com' || this.data1['data'][0].emailId == 'jain.shailendra0894@gmail.com') {
         if(this.data['result']['role'] == 'admin'){
         this.router.navigate(['power-admin/pending']) //home/power-admin/pending

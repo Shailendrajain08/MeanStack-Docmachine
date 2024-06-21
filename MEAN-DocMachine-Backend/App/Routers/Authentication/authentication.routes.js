@@ -284,11 +284,22 @@ router.post("/deleteUser", function (req, res) {
 })
 
 router.get("/profile", (req, res) => {
-        console.log(req)
-    // misc.checkUser(, res).then((user) => {
-    //     AuthCtrl.getProfile(user).then(
-    //     (data) => resp.successGetResponse(res, data),
-    //     (err) => resp.errorResponse(res, err)
-    //   );
-    // });
+    if (req.headers._id) {
+        AuthCtrl.getProfile({_id:req.headers._id}, function (err,resp) {
+            if (err) {
+                res.status(400).json({
+                    message: "Some error",
+                });
+            } else if (resp) {
+                console.log("inside resp");
+                res.status(200).json({
+                    data: resp,
+                });
+            } else {
+                res.status(400).json({
+                    message: "Some error",
+                });
+            }
+        })
+    }
 });
