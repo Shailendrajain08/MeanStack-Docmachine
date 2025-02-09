@@ -157,13 +157,27 @@ export class AuthService {
     const httpOptions = {
       headers: new HttpHeaders({ Authorization: this.authToken, _id:this.user_id._id }),
     };
-    return this.http.get(`${this.apiUrl}/authenticate/profile`, httpOptions)   
+    return this.http.get(`${this.apiUrl}/authenticate/profile`, httpOptions)
   }
 
   public logout() {
     this.authToken = null;
     this.userRole = null
     localStorage.clear();
+  }
+
+  public creatTeam (team:any) {
+    this.loadFromLocalStorage();
+    const httpOptions = {
+      headers: new HttpHeaders({ Authorization: this.authToken }),
+    };
+    return this.http.post(
+      `${this.apiUrl}/team/post`,
+      {
+        team: team,
+      },
+      httpOptions
+    );
   }
 
 }

@@ -7,13 +7,6 @@
                     <img class="mlogo" src="./assets/new-img/LogoFinal.png" />
                 </a>
             </header>
-            <!-- seems like lots of recent admin template have this feature of user info in the sidebar.
-                 looks good, so adding it and enhancing with notifications -->
-
-            <!-- main notification links are placed inside of .sidebar-nav -->
-
-            <!-- every .sidebar-nav may have a title -->
-            <!-- <h5 class="sidebar-nav-title sidebar-title">MENU</h5> -->
             <ul *ngIf="role == 'admin'" class="sidebar-nav">
                 <li class="">
                     <!-- an example of nested submenu. basic bootstrap collapse component -->
@@ -104,7 +97,7 @@
                         <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top: -2px;" (click)="newTask21()" [ngClass]="statusS9 ? 'b-color' : 'nothing'">
                             <span style="margin-left: 50px; line-height: 30px; font-size: 12px;">BOE</span>
                         </div>
-                        <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top: -2px;" (click)="newTask2()" [ngClass]="status2 ? 'b-color' : 'nothing'">
+                        <!-- <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top: -2px;" (click)="newTask2()" [ngClass]="status2 ? 'b-color' : 'nothing'">
                             <span style="margin-left: 50px; line-height: 30px; font-size: 12px;">Credit Notes</span>
                         </div>
 
@@ -178,7 +171,7 @@
                                 <a class="hoverClass" style="cursor: pointer; font-size: 11px;" (click)="nonlcSight()">Sight</a>
                                 <a class="hoverClass" style="cursor: pointer; font-size: 11px;" (click)="nonlcUsance()">Usance</a>
                             </div>
-                        </li>
+                        </li> -->
                     </div>
                 </li>
 
@@ -210,7 +203,7 @@
         </i>
       </span>
                         </div>
-                        <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top: -2px;" (click)="newSub1()" [ngClass]="new1 ? 'b-color' : 'nothing'">
+                        <!-- <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top: -2px;" (click)="newSub1()" [ngClass]="new1 ? 'b-color' : 'nothing'">
                         <span style="margin-left: 50px; line-height: 30px; font-size: 12px;" [routerLink]="['/home/view-document/sb']">Shipping Bill</span>
                         </div>
                         <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top: -2px;" (click)="newSub2()" [ngClass]="new2 ? 'b-color' : 'nothing'">
@@ -260,7 +253,7 @@
                         </div>
                         <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-2px;" (click)="newSub26()" [ngClass]="new26 ? 'b-color' : 'nothing'">
                         <span style="margin-left: 50px; line-height: 30px; font-size: 12px;" [routerLink]="['/home/packing-list']">Packing List Documents</span>
-                        </div>
+                        </div> -->
 
                         <div class="hoverClass" style="cursor: pointer; height: 30px; margin-top:-2px;">
                             <span style="margin-left: 50px; font-size: 10px; line-height: 30px; color: #9ba4b0">Transactions</span>
@@ -303,163 +296,6 @@
                         </div>
                     </div>
                 </li>
-
-
-
-                <!-- <li style="cursor: pointer " class=" " *ngIf="!mt1 " (click)="manageTask1() ">
-      <a class="sidebar-content " style="cursor: pointer; ">
-        <span class="icon side-icon ">
-          <img src="./assets/content-paper-edit.png " />
-        </span> Manage Tasks
-                    <span style=" margin-left: 7%; position: absolute; transform: translate(0, 3px); "><i style="font-size: 20px; margin-left: 50px; " *ngIf="!mt "
-            class="fas fa-angle-right "></i>
-        </span>
-                </a>
-            </li>
-
-            <li class="manage-li " *ngIf="mt1 ">
-                <a style="cursor: pointer " class="manage-content " (click)="manageTask1() ">
-                    <span class="icon side-icon ">
-          <img src="./assets/content-paper-edit.png " />
-        </span> Manage Tasks
-                    <span style=" margin-left: 7%; position: absolute; transform: translate(0, 3px); ">
-          <i style="font-size: 20px " *ngIf="mt " class="fas fa-angle-up "></i></span>
-                </a>
-                <div class="main11 " style="margin-left: 50px; ">
-                    <a style="cursor: pointer " (click)="newTask1() ">
-          New Task
-          <span style="margin-left: 14% "><i *ngIf="!nt1 " class="fas fa-angle-down "></i>
-            <i *ngIf="nt " class="fas fa-angle-up "></i></span>
-        </a>
-                    <div class="main1 " *ngIf="nt1 ">
-                        <a style="cursor: pointer " (click)="export() "> Exports </a>
-                        <div class="main2 " *ngIf="exp ">
-                            <a style="cursor: pointer" [routerLink]="['/home/export-home']">Inward Remittance Disposal</a>
-                            <a style="cursor: pointer" [routerLink]="['/home/bill-lodgement']">Bill Lodgement</a>
-                            <a style="cursor: pointer" [routerLink]="['/home/packing-credit-request']">Packing Credit Request</a>
-                        </div>
-                        <a style="cursor: pointer " [routerLink]="[ '/home/inwardRemmitance'] ">
-            Inward Remittance
-          </a>
-
-                        <a style="cursor: pointer " (click)="import() "> Imports </a>
-                        <div class="main2 " *ngIf="imp ">
-                            <a style="cursor: pointer " [routerLink]="[ '/home/advance-outward-remittance'] ">Advance Outward
-              Remittance</a>
-                            <a style="cursor: pointer " [routerLink]="[ '/home/direct-import-payment'] ">Direct Import Payment</a>
-                            <a style="cursor: pointer " (click)="buc() ">Bills Under Collection</a>
-                            <div class="main2 " *ngIf="billuc ">
-
-                                <a style="cursor: pointer " (click)="lcSight() ">Sight</a>
-                                <a style="cursor: pointer " (click)="lcUsance() ">Usance</a>
-
-
-                            </div>
-                            <a style="cursor: pointer " (click)="buc1() ">Bills Under LC</a>
-                            <div class="main2 " *ngIf="billuc1 ">
-
-                                <a style="cursor: pointer " (click)="nonlcSight() ">Sight</a>
-                                <a style="cursor: pointer " (click)="nonlcUsance() ">Usance</a>
-                            </div>
-                            <a style="cursor: pointer" [routerLink]="['/home/buyer-credit']">Buyers Credit Request</a>
-                            <a style="cursor: pointer" (click)="lcIsurance()">LC Issuance</a>
-                            <div class="main2 " *ngIf="lcI ">
-                                <a style="cursor: pointer " (click)="lcInland() ">Inland</a>
-                                <a style="cursor: pointer " (click)="lcImport() ">Import</a>
-                            </div>
-                            <a style="cursor: pointer ">BOE Submission to Bank</a>
-                            <a style="cursor: pointer" [routerLink]="['/home/fbg-waiver']">FBG Waiver</a>
-                        </div>
-                        <a style="cursor: pointer " (click)="outward() " [routerLink]="[ '/home/outward-remitance'] ">
-            Outward Remittance
-          </a>
-
-                        <a style="cursor: pointer " (click)="other() "> Others </a>
-                        <div class="main2 " *ngIf="others ">
-                            <a style="cursor: pointer ">GR Waiver</a>
-                            <a style="cursor: pointer ">Writeoff</a>
-                            <a style="cursor: pointer ">EEFC conversion request</a>
-                            <a style="cursor: pointer ">Net Off/Set Off</a>
-                        </div>
-                    </div>
-                    <a style="cursor: pointer " [routerLink]="[ '/home/tasks/completed'] ">
-          Completed Task
-        </a>
-
-        <a style="cursor: pointer " [routerLink]="[ '/home/tasks/pending'] "> Draft </a>
-      </div>
-    </li> -->
-                <!-- <li class=" " style="cursor: pointer ">
-      <a class="sidebar-content " [routerLink]="[ '/home/outward-remitance'] ">
-        <span class="icon side-icon ">
-          <img src="./assets/content-paper-edit.png " />
-        </span>
-        Outward Remittance non Imports
-      </a>
-    </li>
-    <li class=" " style="cursor: pointer ">
-      <a class="sidebar-content " [routerLink]="[ '/home/inwardRemmitance'] ">
-        <span class="icon side-icon ">
-          <img src="./assets/content-paper-edit.png " />
-        </span>
-        Inward Remittance
-      </a>
-    </li> -->
-
-                <!-- <li style="cursor: pointer " class=" " (click)="idpmsTask() ">
-      <a class="sidebar-content " style="cursor: pointer; ">
-        <span class="icon side-icon ">
-          <img src="./assets/content-paper-edit.png " />
-        </span>
-        IDPMS
-        <span style=" margin-left: 55%; position: absolute; transform: translate(0, 3px); "><i style="font-size: 18px " *ngIf="!mt3 " class="fas fa-angle-right "></i><i
-            style="font-size: 18px " *ngIf="mt3 " class="fas fa-angle-down "></i>
-        </span>
-      </a>
-    </li>
-    <li class="manage-li " *ngIf="mt3 ">
-
-      <div class="main11 " style=" color: #fff; margin-left: 5px; ">
-        <div class="hoverClass " style="cursor: pointer; padding-top: 5px; ">
-          <span style="margin-left: 50px; font-size: 12px; ">Upload Latest File</span>
-        </div>
-        <div class="hoverClass " style="cursor: pointer; padding-top: 5px; ">
-          <span style="margin-left: 50px; font-size: 12px; ">Upload Advance Remittance</span>
-        </div>
-        <div class="hoverClass " style="cursor: pointer; padding-top: 5px; ">
-          <span style="margin-left: 50px; font-size: 12px; ">Create Match</span>
-        </div>
-
-
-      </div>
-    </li>
-
-    <li style="cursor: pointer " class=" " (click)="edpmsTask() ">
-      <a class="sidebar-content " style="cursor: pointer; ">
-        <span class="icon side-icon ">
-          <img src="./assets/content-paper-edit.png " />
-        </span>
-        EDPMS
-        <span style=" margin-left: 55%; position: absolute; transform: translate(0, 3px); "><i style="font-size: 18px " *ngIf="!mt4 " class="fas fa-angle-right "></i><i
-            style="font-size: 18px " *ngIf="mt4 " class="fas fa-angle-down "></i>
-        </span>
-      </a>
-    </li>
-    <li class="manage-li " *ngIf="mt4 ">
-      <div class="main11 " style=" color: #fff; margin-left: 5px; ">
-        <div class="hoverClass " style="cursor: pointer; padding-top: 5px; ">
-          <span style="margin-left: 50px; font-size: 12px; ">Upload Latest File</span>
-        </div>
-        <div class="hoverClass " style="cursor: pointer; padding-top: 5px; ">
-          <span style="margin-left: 50px; font-size: 12px; ">Upload Advance Remittance</span>
-        </div>
-        <div class="hoverClass " style="cursor: pointer; padding-top: 5px; ">
-          <span style="margin-left: 50px; font-size: 12px; ">Create Match</span>
-        </div>
-
-
-      </div>
-    </li> -->
 
                 <li (click)="newTask6() " [ngClass]="status6 ? 'b-color1' : 'nothing' ">
                     <a [routerLink]="[ '/home/upload'] " style="cursor: pointer " class="sidebar-content ">
@@ -652,88 +488,7 @@
 <router-outlet>
     <app-confirm-dialog></app-confirm-dialog>
 </router-outlet>
-<!-- <div class="content-wrap ">
 
-        <main id="content " class="content " role="main ">
-
-            <h1>hekkko</h1>
-            <div class="analytics " style="width: 83%; ">
-                <div class="analytics-side ">
-                    <div class="row ">
-                        <div class="col-12 mb-lg ">
-                            <section class="widget pb-0 ">
-
-                                <div class="widget-body p-0 support table-wrapper ">
-                                    <table class="table table-striped mb-0 ">
-                                        <thead>
-                                        <tr class="text-muted ">
-                                            <th scope="col "><span class=" pl-3 ">DATE</span></th>
-                                            <th scope="col ">SB ID</th>
-                                            <th scope="col ">INVOICE NUMBER</th>
-                                            <th scope="col ">COMPANY NAME</th>
-                                            <th scope="col ">UPLOADED BY</th>
-                                            <th scope="col ">AMOUNT</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody class="text-dark ">
-                                        <tr>
-                                            <th class="pl-4 fw-normal ">Mark Otto</th>
-                                            <td>ottoto@wxample.com</td>
-                                            <td>ON the Road</td>
-                                            <td>$25 224.2</td>
-                                            <td>11 May 2017</td>
-                                            <td>Otsego</td>
-
-                                        </tr>
-                                        <tr>
-                                            <th class="pl-4 ">Jacob Thornton</th>
-                                            <td>thornton@wxample.com</td>
-                                            <td>HP Core i7</td>
-                                            <td>$1 254.2</td>
-                                            <td>4 Jun 2017</td>
-                                            <td>Fivepointville</td>
-
-                                        </tr>
-                                        <tr>
-                                            <th class="pl-4 ">Larry the Bird</th>
-                                            <td>bird@wxample.com</td>
-                                            <td>Air Pro</td>
-                                            <td>$1 570.0</td>
-                                            <td>27 Aug 2017</td>
-                                            <td>Leadville North</td>
-
-                                        </tr>
-                                        <tr>
-                                            <th class="pl-4 ">Joseph May</th>
-                                            <td>josephmay@wxample.com</td>
-                                            <td>Version Control</td>
-                                            <td>$5 224.5</td>
-                                            <td>19 Feb 2018</td>
-                                            <td>Seaforth</td>
-
-                                        </tr>
-                                        <tr>
-                                            <th class="pl-4 ">Peter Horadnia</th>
-                                            <td>horadnia@wxample.com</td>
-                                            <td>Let's Dance</td>
-                                            <td>$43 594.7</td>
-                                            <td>1 Mar 2018</td>
-                                            <td>Hanoverton</td>
-
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </section>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </main>
-    </div> -->
-<!-- The Loader. Is shown when pjax happens -->
 <div class="loader-wrap hiding hide ">
     <i class="fa fa-circle-o-notch fa-spin-fast "></i>
 </div>

@@ -1,0 +1,74 @@
+[
+  {
+      "currency": "United States Dollar (USD)",
+      "value": "USD"
+  },
+  {
+      "currency": "Indian Rupee (INR)",
+      "value": "INR"
+  },
+  {
+      "currency": "EURO",
+      "value": "EURO"
+  },
+  {
+      "currency": "Great Britain Pound (GBP)",
+      "value": "GBP"
+  },
+  {
+      "currency": "Japanese Yen (JPY)",
+      "value": "JPY"
+  },
+  {
+      "currency": "Swiss Franc (CHF)",
+      "value": "CHF"
+  },
+  {
+      "currency": "Singapore Dollar (SGD)",
+      "value": "SGD"
+  },
+  {
+      "currency": "Canadian Dollar (CAD) ",
+      "value": "CAD"
+  },
+  {
+      "currency": "Australian Dollar (AUD)",
+      "value": "AUD"
+  },
+  {
+      "currency": "United Arab Emirates Dirham (AED)",
+      "value": "AED"
+  },
+  {
+      "currency": "New Zealand Dollar (NZD)",
+      "value": "NZD"
+  },
+  {
+      "currency": "Swedish kroner (SEK)",
+      "value": "SEK"
+  },
+  {
+      "currency": "Saudi Riyal (SAR)",
+      "value": "USD"
+  },
+  {
+      "currency": "Hong Kong Dollar (HKD)",
+      "value": "HKD"
+  },
+  {
+      "currency": "Thai Baht (THB)",
+      "value": "THB"
+  },
+  {
+      "currency": "Kuwaiti Dinar (KWD)",
+      "value": "KWD"
+  },
+  {
+      "currency": "South African Rand (SAR)",
+      "value": "SAR"
+  },
+  {
+      "currency": "Norwegian Kroner (NOK)",
+      "value": "NOK"
+  }
+]

@@ -88,7 +88,7 @@
                       </div>
                       <ul>
                         <!--<li *ngIf="role !='ca' " style="cursor: pointer " class=" " (click)="newTask14() " [ngClass]="status14 ? 'b-color1' : 'nothing' ">
-                                                       an example of nested submenu. basic bootstrap collapse component 
+                                                       an example of nested submenu. basic bootstrap collapse component
                                                       <a class="sidebar-content " [routerLink]="[ '/home/account'] ">
                                                           <span class="account_icon">Account</span>
                                                       </a>
@@ -105,7 +105,7 @@
                           class=" "
                           (click)="newTask()"
                           [ngClass]="status ? 'b-color1' : 'nothing'"
-                        >
+                          >
                           <!-- an example of nested submenu. basic bootstrap collapse component -->
                           <a class="sidebar-content" (click)="logout()">
                             <span class="logout_icons"> </span> Log Out
@@ -191,9 +191,11 @@
                       <td>
                         <form method="POST">
                           <div>
-                             <input class="customfile1" (error)="onUploadError($event)" placeholder="Choose File" (init)="onUploadInit($event)" (success)="onUploadSuccess($event)" (click)="clicked(data)" *ngIf="type === 'directive'" [dropzone]="config">
-                            <!--<p class="choose">Choose File</p> -->
-                            <ngx-dropzone (change)="onSelect($event)">
+                             <!-- <input class="customfile1" (error)="onUploadError($event)" placeholder="Choose File" (init)="onUploadInit($event)" (success)="onUploadSuccess($event)" (click)="clicked(data)" *ngIf="type === 'directive'" [dropzone]="config"> -->
+
+                            <app-dropzone/>
+                             <!--<p class="choose">Choose File</p> -->
+                            <!-- <ngx-dropzone (change)="onSelect($event)">
                               <ngx-dropzone-label
                                 >Drop your files here!</ngx-dropzone-label
                               >
@@ -208,7 +210,7 @@
                                   }})</ngx-dropzone-label
                                 >
                               </ngx-dropzone-preview>
-                            </ngx-dropzone>
+                            </ngx-dropzone> -->
                           </div>
                         </form>
                       </td>

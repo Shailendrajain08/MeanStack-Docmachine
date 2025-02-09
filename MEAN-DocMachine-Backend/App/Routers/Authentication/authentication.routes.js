@@ -291,7 +291,6 @@ router.get("/profile", (req, res) => {
                     message: "Some error",
                 });
             } else if (resp) {
-                console.log("inside resp");
                 res.status(200).json({
                     data: resp,
                 });

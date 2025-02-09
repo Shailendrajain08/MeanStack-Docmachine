@@ -1,0 +1,435 @@
+<div class="container-fluid">
+  <div class="row no-gutter">
+      <!-- The image half -->
+      <!-- <div class="col-md-6 d-none d-md-flex bg-image"></div> -->
+
+
+      <!-- The content half -->
+      <div class="bg-dark" style="float: left; width: 50.99%;">
+          <div class="login d-flex py-5">
+
+              <!-- Demo content-->
+              <div class="container">
+                  <div class="row">
+                      <div class="col-lg-10 col-xl-7 mrg">
+                          <h6 class="display-5">Setup Company Details</h6>
+                          <p class="side1">Give us some of your information about your company</p>
+                          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                              <div class="form-group mb-3">
+                                  <label>Company Name</label>
+                                  <input formControlName="teamName" placeholder="Company name/ Team name" required=""
+                                      class="form-control rounded-pill"
+                                      [ngClass]="{ 'is-invalid': submitted && f.teamName.errors }" autocomplete="off">
+                                  <div *ngIf="submitted && f.teamName.errors" class="invalid-feedback">
+                                      <div *ngIf="f.teamName.errors.required" style="margin-left: 15px;">Company Name
+                                          Required</div>
+                                      <div *ngIf="f.teamName.errors.pattern" style="margin-left: 15px;">Company Name
+                                          should be
+                                          alphanumerics </div>
+                                      <div *ngIf="f.teamName.errors.minlength" style="margin-left: 15px;">
+                                          Company name should contains more than 3 Letter.
+                                      </div>
+                                  </div>
+                              </div>
+
+                              <div class="form-group mb-3">
+                                  <label>*Importer exporter code (IEC)</label>
+                                  <input formControlName="iec" placeholder="Ex: 12121ABVEW." required=""
+                                      class="form-control rounded-pill password password1"
+                                      [ngClass]="{ 'is-invalid': submitted && f.iec.errors }" autocomplete="off">
+                                  <div *ngIf="submitted && f.iec.errors" class="invalid-feedback">
+                                      <div *ngIf="f.iec.errors.required" style="margin-left: 15px;">IEC Required</div>
+                                      <div *ngIf="f.iec.errors.minlength" style="margin-left: 15px;">ICE should
+                                          contains 10 letters</div>
+                                      <div *ngIf="f.iec.errors.maxlength" style="margin-left: 15px;">ICE should
+                                          contains 10 letters</div>
+                                      <div *ngIf="f.iec.errors.pattern" style="margin-left: 15px;">IEC should be
+                                          alphanumerics with 10 letters EX: 12121ABVEW</div>
+                                  </div>
+                              </div>
+                              <div class="form-group mb-3">
+                                  <label>Company Address</label>
+                                  <input formControlName="adress" placeholder="Ex: street address, City. PIN"
+                                      class="form-control rounded-pill password password1"
+                                      [ngClass]="{ 'is-invalid': submitted && f.adress.errors }" autocomplete="off">
+                                  <div *ngIf="submitted && f.adress.errors" class="invalid-feedback">
+                                      <div *ngIf="f.adress.errors.required" style="margin-left: 15px;">Address
+                                          Required</div>
+                                  </div>
+                              </div>
+                              <div class="form-group mb-3">
+                                  <label>Contact Phone number</label>
+                                  <input formControlName="phone" id="password1" type="" placeholder="Ex: 9502323352"
+                                      required="" class="form-control rounded-pill password password1"
+                                      [ngClass]="{ 'is-invalid': submitted && f.phone.errors }" autocomplete="off">
+                                  <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+                                      <div *ngIf="f.phone.errors.required" style="margin-left: 15px;">Phone number
+                                          Required</div>
+                                      <div *ngIf="f.phone.errors.minlength" style="margin-left: 15px;">Phone number
+                                          should
+                                          contains 10 Numbers</div>
+                                      <div *ngIf="f.phone.errors.maxlength" style="margin-left: 15px;">Phone number
+                                          should
+                                          contains 10 letters</div>
+                                      <div *ngIf="f.phone.errors.pattern" style="margin-left: 15px;">Phone number
+                                          should be
+                                          numerics with 10 letters EX: 9111122222</div>
+                                  </div>
+                              </div>
+                              <div class="form-group mb-3">
+                                  <label>CA email id</label>
+                                  <p class="sl">Ex: CA email ID’s for submission of documents for documents like
+                                      15B,annual statutory auditor certificate, write off etc.,</p>
+                                  <input formControlName="caEmail" id="password1" type=""
+                                      placeholder="Ex: example@gmail.com" required=""
+                                      class="form-control rounded-pill password password1"
+                                      [ngClass]="{ 'is-invalid': submitted && f.caEmail.errors }" autocomplete="off">
+                                  <div *ngIf="submitted && f.caEmail.errors" class="invalid-feedback">
+                                      <div *ngIf="f.caEmail.errors.required" style="margin-left: 15px;">CA Email is
+                                          Required</div>
+                                      <div *ngIf="f.caEmail.errors.pattern" style="margin-left: 15px;">CA Email should
+                                          be Email EX: example&#64;email.com</div>
+                                  </div>
+                              </div>
+                              <div class="form-group mb-3">
+                                  <label>CHA email id</label>
+                                  <input formControlName="chaEmail" id="password1" type=""
+                                      placeholder="Ex: example@gmail.com" required=""
+                                      class="form-control rounded-pill password password1"
+                                      [ngClass]="{ 'is-invalid': submitted && f.chaEmail.errors }" autocomplete="off">
+                                  <div *ngIf="submitted && f.chaEmail.errors" class="invalid-feedback">
+                                      <div *ngIf="f.chaEmail.errors.required" style="margin-left: 15px;">CHA Email is
+                                          Required</div>
+                                      <div *ngIf="f.chaEmail.errors.pattern" style="margin-left: 15px;">CHA Email
+                                          should be Email EX: example&#64;email.com</div>
+                                  </div>
+                              </div>
+                              <div class="form-group mb-3">
+                                  <label>*GSTIN</label>
+                                  <input formControlName="gst" id="password1" type="" placeholder="GSTIN" required=""
+                                      class="form-control rounded-pill password password1"
+                                      [ngClass]="{ 'is-invalid': submitted && f.gst.errors }" autocomplete="off">
+                                  <div *ngIf="submitted && f.gst.errors" class="invalid-feedback">
+                                      <div *ngIf="f.gst.errors.required" style="margin-left: 15px;">GSTIN Required
+                                      </div>
+                                      <div *ngIf="f.gst.errors.minlength" style="margin-left: 15px;">GSTIN should
+                                          contains 15 letters</div>
+                                      <div *ngIf="f.gst.errors.maxlength" style="margin-left: 15px;">GSTIN
+                                          should
+                                          contains 15 letters only</div>
+                                      <div *ngIf="f.gst.errors.pattern" style="margin-left: 15px;">GSTIN should be
+                                          alphanumerics with 15 letters EX: 22AAAAA0000A1Z5</div>
+                                  </div>
+
+                              </div>
+
+                              <div class="form-group mb-3" formArrayName="location">
+                                  <label>Location</label>
+                                  <div *ngFor="let course of getCoursesLoc(loginForm); let i = index"
+                                      style="margin-bottom: 10px;" [formGroupName]="i">
+
+                                      <input formControlName="loc" id="password1" type="" placeholder="Location"
+                                          style="margin-bottom: 10px;"
+                                          class="form-control rounded-pill password password1"
+                                          [ngClass]="{ 'is-invalid': submitted1 && h.controls[i].get('loc').errors}"
+                                          autocomplete="off">
+                                      <i style="margin: -35px -18px; float: right; cursor: pointer;" *ngIf='i>0'
+                                          (click)='removeAddressLoc(i)' class="fas fa-times"></i>
+                                      <div *ngIf="submitted1 && h.controls[i].get('loc').errors"
+                                          class="invalid-feedback">
+
+                                          <div *ngIf="h.controls[i].get('loc').errors?.required "
+                                              style="margin-left: 15px;">Location
+                                              Required
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="row col-md-12" style="margin-bottom: 12px;">
+                                      <button class="rounded-pill add" type="button"
+                                          (click)="onAddCourseLoc(loginForm)">
+                                           Add Another Location
+                                      </button>
+                                  </div>
+                              </div>
+
+                              <div class="form-group mb-3" formArrayName="commodity">
+                                  <label>Commodity</label>
+                                  <div *ngFor="let course of getCoursesCom(loginForm); let i = index"
+                                      style="margin-bottom: 10px;" [formGroupName]="i">
+
+                                      <input formControlName="como" id="password1" type="" placeholder="Commodity"
+                                          style="margin-bottom: 10px;"
+                                          class="form-control rounded-pill password password1"
+                                          [ngClass]="{ 'is-invalid': submitted1 && c.controls[i].get('como')}"
+                                          autocomplete="off">
+                                      <i style="margin: -35px -18px; float: right; cursor: pointer;" *ngIf='i>0'
+                                          (click)='removeAddressCom(i)' class="fas fa-times"></i>
+                                      <div *ngIf="submitted1 && c.controls[i].get('como')"
+                                          class="invalid-feedback">
+
+                                          <div *ngIf="c.controls[i].get('como') "
+                                              style="margin-left: 15px;">Commodity
+                                              Required
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="row col-md-12" style="margin-bottom: 12px;">
+                                      <button class="rounded-pill add" type="button"
+                                          (click)="onAddCourseCom(loginForm)">
+                                          Add Another Commodity
+                                      </button>
+                                  </div>
+                              </div>
+
+                              <div class="form-group mb-3" formArrayName="bankDetails">
+                                <div formArrayName="c">
+                                  <label>Bank Details</label>
+                                  <div *ngFor="let course of getCourses(loginForm); let i = index"
+                                      [formGroupName]="i">
+                                      <div class="bankClass">
+
+                                          <label class="bank">*Bank Name</label>
+                                          <a *ngIf='i>0' (click)='removeAddress(i)'
+                                              style="float: right; color: red;">Remove</a>
+                                          <input [(ngModel)]="bankName[i]" formControlName="bank" id="password1"
+                                              type="" placeholder="Type the bank name to search"
+                                              class="form-control rounded-pill password password1"
+                                              (input)="searchData($any($event.target).value, i)"
+                                              [ngClass]="{ 'is-invalid': submitted1 && g.controls[i].get('bank').errors}"
+                                              autocomplete="off">
+                                          <div *ngIf="submitted1 && g.controls[i].get('bank').errors"
+                                              class="invalid-feedback">
+
+                                              <div *ngIf="g.controls[i].get('bank').errors?.required "
+                                                  style="margin-left: 15px;">Bank Name
+                                                  Required
+                                              </div>
+                                          </div>
+                                          <div *ngIf='toggle' style="margin-left: 20px;">
+                                              <table *ngIf='x == i'>
+                                                  <tr *ngFor="let bankName of jsondata"
+                                                      (click)=bankClick(bankName.bank,i)>{{bankName.bank}}</tr>
+                                              </table>
+                                          </div>
+
+
+
+                                          <label class="bank">Bic Address</label>
+                                          <input formControlName="bicAddress" type=""
+                                              style="text-transform: uppercase !important" placeholder="Bic address"
+                                              class="form-control rounded-pill password password1"
+                                              [ngClass]="{ 'is-invalid': submitted1 && g.controls[i].get('bicAddress').errors }"
+                                              autocomplete="off">
+                                          <div *ngIf="submitted1 && g.controls[i].get('bicAddress').errors"
+                                              class="invalid-feedback">
+                                              <div *ngIf="g.controls[i].get('bicAddress').errors?.required"
+                                                  style="margin-left: 15px;">BIC
+                                                  address
+                                                  Required
+                                              </div>
+                                              <div *ngIf="g.controls[i].get('bicAddress').errors?.pattern"
+                                                  style="margin-left: 15px;">BIC
+                                                  address should be alphanumerics Ex: ABCABCA12AB
+                                              </div>
+                                              <div *ngIf="g.controls[i].get('bicAddress').errors?.maxlength"
+                                                  style="margin-left: 15px;">
+                                                  BIC
+                                                  address should contains 11 Letters.
+                                              </div>
+                                          </div>
+
+
+                                          <label class="bank">Account Number</label>
+                                          <input formControlName="accNumber" id="password1" type=""
+                                              placeholder="Account number"
+                                              class="form-control rounded-pill password password1"
+                                              [ngClass]="{ 'is-invalid': submitted1 && g.controls[i].get('accNumber').errors }"
+                                              autocomplete="off">
+                                          <div *ngIf="submitted1 && g.controls[i].get('accNumber').errors"
+                                              class="invalid-feedback">
+                                              <div *ngIf="g.controls[i].get('accNumber').errors?.required"
+                                                  style="margin-left: 15px;">
+                                                  Account number
+                                                  Required
+                                              </div>
+                                              <div *ngIf="g.controls[i].get('accNumber').errors?.pattern"
+                                                  style="margin-left: 15px;">
+                                                  Account number should be number
+                                              </div>
+                                          </div>
+
+
+                                          <!-- <label class="bank">Account Type</label>
+                                          <!-- <input formControlName="accType" id="password1" type=""
+                                              placeholder="Account Type">
+                                          <select class="form-control rounded-pill password password1 deco"
+                                              formControlName="accType"
+                                              [ngClass]="{ 'is-invalid': submitted1 && g.controls[i].get('accType').errors }"
+                                              (change)="modo($any($event.target).value, i)">
+                                              <option value=""></option>
+                                              <option value="OD-over draft">OD-over draft</option>
+                                              <option value="CC- cash credit">CC- cash credit</option>
+                                              <option value="CA-Current account">CA-Current account</option>
+                                              <option value="EEFC - Exchange earner Foreign currency">EEFC -
+                                                  Exchange earner Foreign currency</option>
+                                              <option value="PCFC- packing credit Foreign currency">PCFC- packing
+                                                  credit Foreign currency</option>
+                                              <option value="EBRD- Bill discounting account)">EBRD- Bill
+                                                  discounting account)</option>
+                                          </select> -->
+
+                                          <label class="bank">Account Type</label>
+                                          <div class="customDropdown"    style="display: block;
+                                          width: 100%;
+                                          height: calc(2.25rem + 2px);
+                                          padding: 0.375rem 0.75rem;
+                                          font-size: 1rem;
+                                          line-height: 1.5;
+                                          color: #495057;
+                                          background-color: #fff;
+                                          background-clip: padding-box;
+                                          border: 1px solid #ced4da;
+                                          border-radius: 9.25rem;
+                                          transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;">
+                                              <label style="color: #140404;
+                                              font-size: 12px;">{{modo1[i]}}</label>
+                                              <!-- <span class="dropIco"><i id="down3" class="fas fa-angle-down"></i>
+                                                  <i id="up3" style="display: none" class="fas fa-angle-up"></i>
+                                              </span> -->
+                                              <span class="dropIco" >
+                                               <i id="down3" class="fas fa-angle-down"></i>
+                                               <i id="up3" style="display: none" class="fas fa-angle-up"></i>
+                                          </span>
+                                              <div class="dropdown-content" style="min-width:100%; margin-right: -20px !important;">
+                                                  <!-- <a  style="min-width:100%;"></a> -->
+                                                  <a (click)="modo('OD-over draft',i)" style="min-width:100%;">OD-over draft</a>
+                                                  <a (click)="modo('CC-cash credit',i)" style="min-width :100%;">CC-cash credit</a>
+                                                  <a (click)="modo('Ca-Current account',i)" style="min-width:100%;">Ca-Current account</a>
+                                                  <a (click)="modo('EEFC - Exchange earner Foreign currency',i)" style="min-width:100% ; ">EEFC -
+                                                      Exchange earner Foreign currency</a>
+                                                      <a (click)="modo('PCFC- packing credit Foreign currency',i)" style="min-width:100%;">PCFC- packing
+                                                          credit Foreign currency</a>
+                                                  <a (click)="modo('EBRD- Bill discounting account',i)" style="min-width:100%;">EBRD- Bill
+                                                      discounting account</a>
+                                              </div>
+                                          </div>
+
+
+
+                                          <!-- <div *ngIf="submitted1 && g.controls[i].get('accType').errors"
+                                              class="invalid-feedback">
+                                              <div *ngIf="g.controls[i].get('accType').errors.required"
+                                                  style="margin-left: 15px;">
+                                                  Account type is required
+                                              </div>
+                                          </div> 
+
+
+                                          <label class="bank">Currency Type</label>
+                                           <input formControlName="currency" id="password1" type=""
+                                              placeholder="currency"
+                                              class="form-control rounded-pill password password1"> -->
+                                          <input [(ngModel)]="currencyName[i]" formControlName="currency"
+                                              id="password1" type="" placeholder="Type the currency name to search"
+                                              class="form-control rounded-pill password password1"
+                                              (input)="searchCurrency($any($event.target).value,i)"
+                                              [ngClass]="{ 'is-invalid': submitted1 && g.controls[i].get('currency').errors }"
+                                              autocomplete="off">
+                                          <div *ngIf="submitted1 && g.controls[i].get('currency').errors"
+                                              class="invalid-feedback">
+                                              <div *ngIf="g.controls[i].get('currency').errors?.required"
+                                                  style="margin-left: 15px;">
+                                                  Currency Type is required
+                                              </div>
+                                          </div>
+                                          <div *ngIf='toggle1' style="margin-left: 20px;">
+                                              <table *ngIf='y == i'>
+                                                  <tr *ngFor="let currencyName of jsondata1"
+                                                      (click)=currencyClick(currencyName.value,i)>
+                                                      {{currencyName.value}}</tr>
+                                              </table>
+                                          </div>
+
+
+                                      </div>
+                                  </div>
+                              </div>
+                            </div>
+                              <div class="row col-md-12" style="margin-bottom: 12px;">
+                                  <button class="rounded-pill add" type="button" (click)="onAddCourse(loginForm)">
+                                      Add Another Bank
+                                  </button>
+                              </div>
+
+                              <div class="form-group mb-3">
+                                  <label>Letter Head</label> <br>
+                                  <form method="POST">
+                                      <div>
+                                          <!-- uncomment code to enable uload file -->
+                                          <!-- <input  class="customfile1" (error)="onUploadError($event)"
+                                              placeholder="Choose File" (init)="onUploadInit($event)"
+                                              (success)="onUploadSuccess($event)"
+                                              (sending)="sending($event,'Letter Head')" *ngIf="type === 'directive'"
+                                              [dropzone]="config" [disabled]="true" > -->
+                                              <input [disabled]="dynamicVariable" placeholder="Choose File" class="customfile1" >
+                                          <!--<p class="choose">Choose File</p> -->
+                                          <p class="bottomText">Maximum size: 5MB</p>
+                                          <!-- <p class="bottomText" *ngIf="letterHead">Uploading...</p>
+                                          <p class="bottomText" *ngIf="letterHeadDone">Uploading Done</p> -->
+                                      </div>
+
+
+                                  </form>
+
+                              </div>
+                              <div class="form-group mb-3">
+                                  <label>Round Seal</label><br>
+                                  <form method="POST">
+                                      <!-- uncomment code to enable uload file -->
+                                      <!-- <input  [disabled]="true" class="customfile1"
+                                         (error)="onUploadError($event)"
+                                          placeholder="Choose File" (init)="onUploadInit($event)"
+                                          (success)="onUploadSuccess($event)" (sending)="sending($event,'Round Seal')"
+                                          *ngIf="type === 'directive'" [dropzone]="config"> -->
+                                          <input [disabled]="dynamicVariable" placeholder="Choose File" class="customfile1" >
+                                      <!-- <p class="choose">Choose File</p> -->
+                                      <p class="bottomText">Maximum size: 5MB</p>
+                                      <!-- <p class="bottomText" *ngIf="roundSeal">Uploading...</p>
+                                      <p class="bottomText" *ngIf="roundSealDone">Uploading Done</p> -->
+                                  </form>
+                              </div>
+
+                              <div class="form-group mb-3">
+                                  <label>For Seal</label><br>
+                                  <form method="POST">
+                                      <!-- uncomment code to enable uload file -->
+                                      <!-- <input [disabled]="true" class="customfile1" placeholder="Choose File"
+                                          (error)="onUploadError($event)" (init)="onUploadInit($event)"
+                                          (success)="onUploadSuccess($event)" (sending)="sending($event,'For Seal')"
+                                          *ngIf="type === 'directive'" [dropzone]="config"> -->
+                                          <input [disabled]="dynamicVariable" placeholder="Choose File" class="customfile1" >
+                                      <!-- <p class="choose">Choose File</p> -->
+                                      <p class="bottomText">Maximum size: 5MB</p>
+                                      <!-- <p class="bottomText" *ngIf="forSeal">Uploading...</p>
+                                      <p class="bottomText" *ngIf="forSealDone">Uploading Done</p> -->
+                                  </form>
+                              </div>
+
+                              <button type="submit" class="btn" [class.disable]="isDisabled"
+                                  [disabled]="isDisabled">Get Started</button>
+                          </form>
+
+                      </div>
+                  </div>
+              </div><!-- End -->
+
+          </div>
+      </div><!-- End -->
+      <!-- The image half -->
+      <div class="parent" style="float: right; width: 609px; height: 899px;">
+          <img class="image1" src="./assets/Image.png" />
+          <img class="image2" src="./assets/LogoFinal.png" style="width: 299px; height: 92px;" />
+      </div>
+
+  </div>
+</div>

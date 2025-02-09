@@ -12,5 +12,9 @@ export const routes: Routes = [
     {
         path: 'caDocuments',
         loadChildren: () => import('./CADocument/cadoc.module').then(m=>m.CADocModule)
-    }
+    },
+    {
+      path: 'home',
+      loadChildren: () => import('./Home/home.module').then(m=>m.HomeModule)
+  }
 ];

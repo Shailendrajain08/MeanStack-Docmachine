@@ -8,6 +8,7 @@ import { NotVerifiedComponent } from './not-verified/not-verified.component';
 import { NewUserComponent } from './new-user/new-user.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { UpdatePasswordComponent } from './update-password/update-password.component';
+import { CreateTeamComponent } from './create-team/create-team.component';
 
 const routes: Routes = [
     {
@@ -43,6 +44,11 @@ const routes: Routes = [
     {
         path: "forgotpassword",
         component: ForgotPasswordComponent,
+        pathMatch: "full"
+    },
+    {
+      path: "createTeam",
+        component: CreateTeamComponent,
         pathMatch: "full"
     },
     {

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { ConfirmDialogComponent } from "../confirm-dialog/confirm-dialog.component";
+import { ConfirmDialogComponent } from "../../confirm-dialog/confirm-dialog.component";
 
 @Component({
     selector: 'app-side-nav',
@@ -201,83 +201,83 @@ export class SideNavComponent {
   }
 
   newSub2(){
-    
+
   }
 
   newSub3(){
-    
+
   }
   newSub4(){
-    
+
   }
   newSub5(){
-    
+
   }
   newSub6(){
-    
+
   }
   newSub7(){
-    
+
   }
   newSub8(){
-    
+
   }
   newSub9(){
-    
+
   }
   newSub10(){
-    
+
   }
   newSub11(){
-    
+
   }
   newSub12(){
-    
+
   }
   newSub13(){
-    
+
   }
   newSub14(){
-    
+
   }
 
   newSub15(){
 
   }
   newSub16(){
-    
+
   }
   newSub17(){
-    
+
   }
   newSub18(){
-    
+
   }
   newSub19(){
-    
+
   }
   newSub20(){
-    
+
   }
   newSub21(){
-    
+
   }
   newSub22(){
-    
+
   }
   newSub23(){
-    
+
   }
   newSub24(){
-    
+
   }
   newSub25(){
-    
+
   }
   newSub26(){
-    
+
   }
-  
+
 
   lcSight(){
 
